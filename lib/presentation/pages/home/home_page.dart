@@ -20,11 +20,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static const int _initialPage = 300;
-  static const Duration _autoScrollDelay = Duration(seconds: 5);
-  static const Duration _autoScrollDuration = Duration(milliseconds: 650);
+  static const Duration _autoScrollDelay = Duration(seconds: 4);
+  static const Duration _autoScrollDuration = Duration(milliseconds: 550);
 
   final PageController _pageController = PageController(
-    viewportFraction: 0.72,
+// Hệ số kích thước của chiều rộng thẻ pageView tại trang chủ
+    viewportFraction: 0.68,
+    // viewportFraction: 0.72,
     initialPage: _initialPage,
   );
   Timer? _autoScrollTimer;
@@ -189,12 +191,12 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         children: [
           Container(
-            width: 50,
-            height: 50,
+            width: 48,
+            height: 48,
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
+              shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.06),
@@ -227,13 +229,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            width: 42,
-            height: 42,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              gradient: AppColors.buttonGradientFor(context),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.notifications_none_rounded, size: 23),
+            child: const Icon(
+              Icons.notifications_none_rounded,
+              color: Colors.white,
+              size: 24,
+            ),
           ),
         ],
       ),

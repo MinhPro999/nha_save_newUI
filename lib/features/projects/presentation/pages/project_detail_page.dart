@@ -414,7 +414,11 @@ class _MoreActions extends StatelessWidget {
       value: value,
       child: Row(
         children: [
-          Icon(icon, size: 20),
+          Icon(
+            icon,
+            size: 20,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
           const SizedBox(width: 12),
           Text(context.tr(labelKey)),
         ],

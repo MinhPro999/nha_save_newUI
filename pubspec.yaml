@@ -36,6 +36,12 @@ dev_dependencies:
   sqflite_common_ffi: ^2.3.3
   bloc_test: ^9.1.7
 
+# firebase_core_web 3.11.0 dùng `isA` trên Object (chỉ có từ Dart 3.12),
+# gây lỗi "The method 'isA' isn't defined for the type 'Object'" với Dart 3.10.7.
+# Ghim xuống 3.10.0 cho tới khi FlutterFire phát hành bản đã sửa.
+dependency_overrides:
+  firebase_core_web: 3.10.0
+
 flutter:
 
   # Keep IDE-generated Run configurations on the development environment.

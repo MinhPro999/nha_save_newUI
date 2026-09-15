@@ -75,19 +75,12 @@ class _ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final accent = AppColors.linearShapeFor(context);
     return Container(
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: isDark
-              ? const [Color(0xFF123D42), Color(0xFF1A282D)]
-              : const [Color(0xFFDDF8F6), Color(0xFFF6FCFC)],
-        ),
+        gradient: AppColors.settingRowGradientFor(context),
       ),
       child: Row(
         children: [
@@ -241,7 +234,7 @@ class _AboutCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        gradient: AppColors.settingRowGradientFor(context),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: Theme.of(context).dividerColor),
       ),

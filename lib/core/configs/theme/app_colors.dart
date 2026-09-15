@@ -56,13 +56,13 @@ class AppColors {
   static LinearGradient navigationGradientForBrightness(Brightness brightness) {
     return brightness == Brightness.dark
         ? const LinearGradient(
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [darkNavigationStart, darkNavigationEnd],
           )
         : const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [lightNavigationStart, lightNavigationEnd],
           );
   }

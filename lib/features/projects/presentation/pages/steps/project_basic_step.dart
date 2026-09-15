@@ -26,7 +26,20 @@ class _ProjectBasicStepState extends State<ProjectBasicStep> {
   final ImagePicker _imagePicker = ImagePicker();
   final ProjectCoverImageService _imageService =
       const ProjectCoverImageService();
+  final TextEditingController _nameController = TextEditingController();
   bool _processingImage = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController.text = context.read<ProjectWizardCubit>().state.name;
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
 
   Future<void> _chooseImage() async {
     final source = await showImageSourceBottomSheet(context);
@@ -242,7 +255,7 @@ class _ProjectBasicStepState extends State<ProjectBasicStep> {
             const SizedBox(height: 20),
             TextFormField(
               key: const Key('projectNameField'),
-              initialValue: state.name,
+              controller: _nameController,
               textCapitalization: TextCapitalization.sentences,
               textInputAction: TextInputAction.next,
               onChanged: (value) => cubit.updateBasicInfo(name: value),

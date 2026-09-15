@@ -613,7 +613,7 @@ class _EditorSurface extends StatelessWidget {
   }
 }
 
-class _NumberField extends StatelessWidget {
+class _NumberField extends StatefulWidget {
   const _NumberField({
     required this.fieldKey,
     required this.width,
@@ -633,17 +633,56 @@ class _NumberField extends StatelessWidget {
   final String suffix;
 
   @override
+  State<_NumberField> createState() => _NumberFieldState();
+}
+
+class _NumberFieldState extends State<_NumberField> {
+  late final TextEditingController _controller;
+  late final FocusNode _focusNode;
+
+  String _text(double value) =>
+      widget.integer ? value.toInt().toString() : _format(value);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: _text(widget.value));
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void didUpdateWidget(_NumberField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Chỉ đồng bộ giá trị bên ngoài khi ô không đang được nhập, tránh việc
+    // rebuild sau mỗi ký tự làm reset text (VD: gõ "3." bị xóa dấu chấm).
+    if (!_focusNode.hasFocus && widget.value != oldWidget.value) {
+      final next = _text(widget.value);
+      if (_controller.text != next) {
+        _controller.text = next;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
+      width: widget.width,
       child: TextFormField(
-        key: fieldKey,
-        initialValue: integer ? value.toInt().toString() : _format(value),
-        keyboardType: TextInputType.numberWithOptions(decimal: !integer),
-        onChanged: (text) => onChanged(_parse(text)),
+        key: widget.fieldKey,
+        controller: _controller,
+        focusNode: _focusNode,
+        keyboardType: TextInputType.numberWithOptions(decimal: !widget.integer),
+        onChanged: (text) => widget.onChanged(_parse(text)),
         decoration: InputDecoration(
-          labelText: label,
-          suffixText: suffix.isEmpty ? null : suffix,
+          labelText: widget.label,
+          suffixText: widget.suffix.isEmpty ? null : widget.suffix,
           border: projectStepInputBorder,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
