@@ -92,10 +92,12 @@ Phân loại dựa trên **dependency thực tế** (import + usage), không the
 
 > Ghi chú: `calculators/paint_calculator.dart:39` còn comment nhắc `wall_calculator.dart` (văn bản legacy nguyên bản). Không sửa để giữ byte-parity với legacy — chỉ là comment, không ảnh hưởng compile/runtime.
 
-### 2.3. UNKNOWN — cần xác minh thêm ở Gate 4 (KHÔNG tự đoán)
-- `FoundationBangAttribute` (`can_2_ben`, `lech_1_ben`, `lech_2_ben`) ↔ `FoundationAlignment` mới (`balanced`, `offsetOneSide`, `offsetTwoSides`): cần verify source-level cách legacy dùng (chỉ có trong model, calculator móng băng dùng trường nào).
-- `StructureType` mới (`reinforcedConcrete/steelFrame/masonry/timber`): **chưa tìm thấy chỗ legacy calculator tiêu thụ structureType** → mapping target UNKNOWN.
-- Cách legacy tính **cost** cuối cùng (price snapshot × quantity ở đâu — `project_detail_screen`/`ProjectProvider`): xác minh để mô phỏng đúng tại adapter, không copy cả legacy UI.
+### 2.3. HISTORICAL UNKNOWN AT GATE 4 — RESOLVED (bản ghi lịch sử)
+
+Các mục từng là UNKNOWN tại thời điểm Gate 1/4 — đã resolved/verified ở Gate 4/6:
+- `FoundationBangAttribute` ↔ `FoundationAlignment`: **RESOLVED / VERIFIED** — `balanced→can_2_ben`, `offsetOneSide→lech_1_ben`, `offsetTwoSides→lech_2_ben` (Gate 4); calculator móng băng KHÔNG tiêu thụ attribute (đã xác minh source-level).
+- `StructureType`: **RESOLVED / VERIFIED DECISION** — legacy calculator không tiêu thụ → không truyền vào engine (vẫn giữ trong domain model + persistence).
+- Cost convention legacy: **RESOLVED / VERIFIED** — price snapshot × quantity, không round, total = Σ (Gate 4 + Gate 6 golden parity).
 
 ---
 
@@ -169,7 +171,7 @@ Core hiện chỉ import: `dart:math`, `package:intl`, và import nội bộ tư
 ✅ Không có: `flutter/*`, `features/`, `presentation/`, cubit, sqflite/database, repository, network, material library UI, navigation, provider.
 ✅ Không có inbound reference nào từ `lib/` ngoài core vào core (adapter chưa tồn tại).
 
-## 9. FILES MISSING / CẦN TẠO (ngoài core — Gate 4/5)
+## 9. FILES MISSING / CẦN TẠO (ngoài core — Gate 4/5) — TẤT CẢ ĐÃ TẠO
 
 | Thành phần | Trạng thái |
 |---|---|
@@ -215,21 +217,29 @@ Core hiện chỉ import: `dart:math`, `package:intl`, và import nội bộ tư
 | `concrete_sand` → `'Bê tông'` (m³) | giữ nguyên | **DOCUMENTED LEGACY SEMANTIC** |
 | Materials không aggregated key | fallback name, không sinh quantity | **DOCUMENTED LEGACY AGGREGATED PATH LIMITATION** |
 
-## 11. RISKS
+## 11. HISTORICAL RISKS — RESOLVED
 
-1. `costs`/`intermediateResults` luôn rỗng từ core → adapter phải tái tạo đúng convention cost của legacy (price snapshot × quantity) — xác minh `project_detail_screen.dart` legacy trước Gate 4.
-2. `StructureType` mới chưa có chỗ tiêu thụ trong legacy foundation calculator → nguy cơ mapping thiếu semantic target.
-3. `_calculateFoundationMaterials` giả định móng 0.3×0.5 m và 10 thanh thép (chính trong legacy) — giữ nguyên, không "sửa" khi integration.
-4. Key output là chuỗi tiếng Việt — LegacyResultMapper phải map sang typed result, tránh UI phụ thuộc raw Map.
-5. 2 local clone legacy tồn tại, 1 clone lệch SHA (`coder/nha_save` @ `e83b00e`) — **chỉ** dùng `app_dev/nha_save` @ `e5fc8943`.
-6. `lib/calculator_core/` đang untracked (chưa commit) — nên commit trước khi sửa tiếp để có snapshot.
-7. `intl ^0.20.0` đã thêm vào pubspec (direct dep cho `number_formatter`) — chưa commit.
+> Các rủi ro được ghi nhận trong quá trình Phase 2 (bản ghi lịch sử — provenance
+> giữ nguyên). Tất cả đã được xử lý/verify ở các Gate sau — **trạng thái cuối:
+> RESOLVED**, không còn rủi ro mở nào thuộc các mục này.
 
-## 12. UNRESOLVED ITEMS (TODO / NEEDS_REVIEW / BLOCKED)
+1. `costs`/`intermediateResults` luôn rỗng từ core → adapter phải tái tạo đúng cost convention legacy (price snapshot × quantity) — **RESOLVED**: xác minh source-level ở Gate 4 (`project_detail_screen.dart`) và golden parity ở Gate 6.
+2. `StructureType` mới chưa có chỗ tiêu thụ trong legacy foundation calculator — **RESOLVED / VERIFIED DECISION**: không truyền vào engine (Gate 4); giữ nguyên domain model + persistence (Gate 8).
+3. `_calculateFoundationMaterials` giả định móng 0.3×0.5 m và 10 thanh thép (chính trong legacy) — **RESOLVED**: giữ nguyên legacy behavior, không "sửa" khi integration.
+4. Key output là chuỗi tiếng Việt — LegacyResultMapper phải map sang typed result, tránh UI phụ thuộc raw Map — **RESOLVED**: UI chỉ nhận `ProjectCalculationResult` (Gate 8).
+5. 2 local clone legacy tồn tại, 1 clone lệch SHA — **RESOLVED**: toàn bộ Phase 2 chỉ dùng `app_dev/nha_save` @ `e5fc8943` (SHA được verify mỗi lần chạy oracle).
+6. `lib/calculator_core/` từng untracked — **RESOLVED**: đã commit trong snapshot `51e2794`.
+7. `intl ^0.20.0` direct dep cho `number_formatter` — **RESOLVED**: đã commit trong `pubspec.yaml`.
 
-- `TODO (Gate 4)`: verify từng enum mapping ở bảng mục 10 bằng cách đọc legacy wizard steps (`step3_foundation_structure.dart`, `step5_detailed_parameters.dart`).
-- `TODO (Gate 4)`: xác minh convention tính cost ở legacy `project_detail_screen.dart` (sau `_calculateCosts()`).
-- `BLOCKED`: không có — closure đã đủ, không thiếu dependency.
+## 12. HISTORICAL GATE 4 ITEMS — RESOLVED
+
+> Các item dưới đây từng được đánh dấu `TODO` trong Gate 4 (bản ghi lịch sử —
+> provenance giữ nguyên). Tất cả đã được verify/resolved ở các Gate sau; không
+> còn unresolved item nào liên quan đến chúng.
+
+- Enum mappings (bảng mục 10) — **RESOLVED / VERIFIED**: Gate 4 đã verify source-level bằng legacy wizard steps (`step3_foundation_structure.dart`, `step5_detailed_parameters.dart`); kết quả cuối ghi trong `PHASE2_MAPPING_SPEC.md` và bảng FINAL mục 10.
+- Cost convention (price snapshot × quantity, không round, total = Σ) — **RESOLVED / VERIFIED**: Gate 4 xác minh từ `project_detail_screen.dart` (sau `_calculateCosts()`); Gate 6 golden xác nhận parity.
+- `BLOCKED`: không có — closure đã đủ, không thiếu dependency (trạng thái này giữ nguyên từ Gate 4 đến kết thúc Phase 2).
 
 ## 13. GHI CHÚ TUÂN THỦ
 
@@ -269,7 +279,7 @@ Core hiện chỉ import: `dart:math`, `package:intl`, và import nội bộ tư
 - **Xử lý xong toàn bộ test failure còn lại**: fix assertion `ListTile`/`DecoratedBox` ở `profile_page.dart` (2 SwitchListTile bọc `Material(type: transparency)`) và `project_basic_step.dart` (province/district picker bọc Material); cập nhật expectation `viewportFraction 0.72 → 0.68` (production đã đổi) trong `construction_plan_app_test.dart`. `test/widget_test.dart` đã được sửa (không còn `MyApp`).
 - **Full suite: +105, 0 failures.** Golden 61/61, mapper 12/12, service 6/6, E2E 10/10.
 - `dart analyze lib test tool`: 0 error / 0 warning. `calculator_core` parity legacy (14 identical + 3 import/whitespace đã xác minh). Legacy repo clean @ `e5fc8943`.
-- Git working tree: các thay đổi Phase 2 chưa commit (list trong report) — commit/tag do người dùng quyết định.
+- Git working tree (tại thời điểm Gate 9): chưa commit — **đã commit sau đó ở Final Closeout**: `51e2794` + tag `phase2-complete`; working tree hiện clean.
 - Không build APK (bước tiếp theo sau review).
 - **PHASE 2 = COMPLETE** (mọi success criteria PASS).
 
@@ -296,3 +306,4 @@ calculator_core: unchanged / parity verified (14 byte-identical + 3 known benign
 Legacy repo: clean
 ProjectCostEstimator: deleted
 Production binding: `CalculationService → LegacyCalculationService`
+Commit: `51e2794cfaa70c5516607badb07ca77f8d782a08` · Tag: `phase2-complete`

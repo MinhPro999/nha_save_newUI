@@ -115,6 +115,7 @@ void main() {
       const service = LegacyCalculationService();
       final result = service.calculate(buildSampleProject());
       expect(result, isA<ProjectCalculationResult>());
+      // ignore: unnecessary_type_check
       expect(result.materialLines.every((l) => l is ProjectMaterialLine), true);
     });
   });
