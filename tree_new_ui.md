@@ -78,38 +78,68 @@
  ┃ ┃ ┃ ┗ 📂remotes
  ┃ ┃ ┃ ┃ ┗ 📂origin
  ┃ ┃ ┃ ┃ ┃ ┣ 📜HEAD
- ┃ ┃ ┃ ┃ ┃ ┗ 📜main
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜main
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜main_phase2
  ┃ ┃ ┗ 📜HEAD
  ┃ ┣ 📂objects
+ ┃ ┃ ┣ 📂00
+ ┃ ┃ ┃ ┗ 📜695585462206ba5879668a85b2d8912b65d348
+ ┃ ┃ ┣ 📂01
+ ┃ ┃ ┃ ┗ 📜eb7d9318028d9cacf581d7ba0a17aa90f19158
  ┃ ┃ ┣ 📂02
+ ┃ ┃ ┃ ┣ 📜8a90420fdb592567b6f479316783fda0ad7b9d
+ ┃ ┃ ┃ ┣ 📜a8bda0adfcb737ae6a279ed42ad3ed3bb8b652
  ┃ ┃ ┃ ┗ 📜afbe4fd2cc6d184274d91657fb62e496bf3f6a
  ┃ ┃ ┣ 📂03
  ┃ ┃ ┃ ┣ 📜3b9c9faaa6d48bc9cf95ba9bcb70c38d308fd5
+ ┃ ┃ ┃ ┣ 📜da68452fb02dd68fa849cfe4837e497d0ca867
  ┃ ┃ ┃ ┗ 📜fb3ce066cde020b9d467ccd4a2663ce12fbd04
  ┃ ┃ ┣ 📂04
  ┃ ┃ ┃ ┣ 📜26a5fd6fbcdac690b5f89d36e331d8025b86de
  ┃ ┃ ┃ ┗ 📜d3874aa63316427030e51677e9b9ad1d4a5999
+ ┃ ┃ ┣ 📂05
+ ┃ ┃ ┃ ┗ 📜2bb31362cb3b6ed102088522496c1c459bafaa
  ┃ ┃ ┣ 📂07
  ┃ ┃ ┃ ┣ 📜386902e01f466cedbc09062c86c3d6e40596ea
  ┃ ┃ ┃ ┗ 📜b661faec59e4de6cd5b2f09b7d2bf1e73b9b61
  ┃ ┃ ┣ 📂0a
  ┃ ┃ ┃ ┣ 📜20fe5b2d5eea36fdbfd3cecb206826b25013bc
- ┃ ┃ ┃ ┗ 📜3f5fa40fb3d1e0710331a48de5d256da3f275d
+ ┃ ┃ ┃ ┣ 📜3f5fa40fb3d1e0710331a48de5d256da3f275d
+ ┃ ┃ ┃ ┗ 📜ccccec885ae4f2f255a67f6706e13d2ec28b61
  ┃ ┃ ┣ 📂0c
  ┃ ┃ ┃ ┗ 📜d497058b5e12e69dfb0e053959ba6f4726d745
  ┃ ┃ ┣ 📂0e
  ┃ ┃ ┃ ┗ 📜df7dae087c542316736c9a020e8dd3d95de75b
  ┃ ┃ ┣ 📂0f
+ ┃ ┃ ┃ ┣ 📜7f2601827629a5e08a7c5d7d067c04e5e61b9a
  ┃ ┃ ┃ ┗ 📜a7eabc1dca6d830eccf0c7549277c0c6a1fbf2
  ┃ ┃ ┣ 📂10
  ┃ ┃ ┃ ┗ 📜f14642f456425bf0b36f854ea1a238c411ab32
  ┃ ┃ ┣ 📂13
+ ┃ ┃ ┃ ┣ 📜14860ef04daa0c8b54abba456c6c4f47bbf811
  ┃ ┃ ┃ ┣ 📜477c11d0540b384cfe8fb0a1bb59098a2425b2
  ┃ ┃ ┃ ┗ 📜b35eba55c6dabc3aac36f33d859266c18fa0d0
+ ┃ ┃ ┣ 📂14
+ ┃ ┃ ┃ ┣ 📜de5423f8a674cf293a1c66a5ecb61817ef8ab7
+ ┃ ┃ ┃ ┗ 📜e4a1709d452b54e5b206be8d46013232ecb463
+ ┃ ┃ ┣ 📂15
+ ┃ ┃ ┃ ┣ 📜190fa7629b0b1c6667068262a8d46032968833
+ ┃ ┃ ┃ ┗ 📜f65539f66a61ab853985e9caffdbb8e824ed53
  ┃ ┃ ┣ 📂17
- ┃ ┃ ┃ ┗ 📜4f99a444f9acc87b88f600bd4a702c60ea1175
+ ┃ ┃ ┃ ┣ 📜4f99a444f9acc87b88f600bd4a702c60ea1175
+ ┃ ┃ ┃ ┗ 📜d5cfec978349eda47a15124e42e6688960f322
  ┃ ┃ ┣ 📂18
+ ┃ ┃ ┃ ┣ 📜ae5871817547210d6b686163e798e6aec4df34
  ┃ ┃ ┃ ┗ 📜cf57977c8b41693b86190a977ca683635418d4
+ ┃ ┃ ┣ 📂1a
+ ┃ ┃ ┃ ┣ 📜046a6bf8cca330ba78c7a6192640c5ecf4f73f
+ ┃ ┃ ┃ ┗ 📜dfd63fa9c9a4db42aa25dfb08e86847726e38c
+ ┃ ┃ ┣ 📂1b
+ ┃ ┃ ┃ ┗ 📜709070ee3778dba8459fddd343349919cf8330
+ ┃ ┃ ┣ 📂1d
+ ┃ ┃ ┃ ┗ 📜ddddb0cc9f9b2b9e70f7db1b5c59c09621e94b
+ ┃ ┃ ┣ 📂1e
+ ┃ ┃ ┃ ┗ 📜505c5acf5e7f24f0299cbb6c7281cc1d98a642
  ┃ ┃ ┣ 📂1f
  ┃ ┃ ┃ ┗ 📜87a5ca0c604dda22b9be88150682c4395d4d99
  ┃ ┃ ┣ 📂22
@@ -117,30 +147,57 @@
  ┃ ┃ ┃ ┗ 📜71dac39169b536867cd6da69a44c96de201a62
  ┃ ┃ ┣ 📂23
  ┃ ┃ ┃ ┗ 📜e2e5382078317e5c65779e3ed1919a16ebfb79
+ ┃ ┃ ┣ 📂25
+ ┃ ┃ ┃ ┗ 📜0957bd3d1a9a81f3d6e45f7d5cf64b98f76419
  ┃ ┃ ┣ 📂26
  ┃ ┃ ┃ ┣ 📜66c430c694d236d66b9373915fdd6b722bac11
  ┃ ┃ ┃ ┗ 📜e6c91895bcc410a86dd32ddf76642338070fc6
  ┃ ┃ ┣ 📂28
- ┃ ┃ ┃ ┗ 📜c77403e5add5601147b59bce80d3dc51c4cbd3
+ ┃ ┃ ┃ ┣ 📜c77403e5add5601147b59bce80d3dc51c4cbd3
+ ┃ ┃ ┃ ┗ 📜d1e815d10a9b0ae152eae3e7ba128a3a74d2eb
  ┃ ┃ ┣ 📂2a
- ┃ ┃ ┃ ┗ 📜7811f2d0ef20233ed066c8e7241a69a757ed87
+ ┃ ┃ ┃ ┣ 📜7811f2d0ef20233ed066c8e7241a69a757ed87
+ ┃ ┃ ┃ ┗ 📜e2c9ab64e6bc2716dcd3b081de504cc83c6e52
  ┃ ┃ ┣ 📂2b
+ ┃ ┃ ┃ ┣ 📜124c3147d7f49cb4eb37f2ab249edb5baf2fb4
  ┃ ┃ ┃ ┗ 📜ad2a10be0bcc7b26c9e667d9803e2c9dcfa4a4
+ ┃ ┃ ┣ 📂2d
+ ┃ ┃ ┃ ┗ 📜25ce3b1415bff2b37d24200cb5e115d7e57c61
  ┃ ┃ ┣ 📂2e
  ┃ ┃ ┃ ┗ 📜da5694134193b5e3747dca8666ce3e8a2886eb
  ┃ ┃ ┣ 📂2f
- ┃ ┃ ┃ ┗ 📜1632cfddf3d9dade342351e627a0a75609fb46
+ ┃ ┃ ┃ ┣ 📜1632cfddf3d9dade342351e627a0a75609fb46
+ ┃ ┃ ┃ ┗ 📜b150a48825e33510b4ebbc8fb397a69fa0d184
+ ┃ ┃ ┣ 📂30
+ ┃ ┃ ┃ ┗ 📜752d1812f77649fd62f7cb164ed65ddbdc1ae1
  ┃ ┃ ┣ 📂32
+ ┃ ┃ ┃ ┣ 📜0acd966a08edea57e1d4504c13f002152aaa26
  ┃ ┃ ┃ ┣ 📜33cd8e2c609df19e3f9f57bc38208b87a4dfa9
+ ┃ ┃ ┃ ┣ 📜35d2ea793bc559d14925e563aa98a850f733de
+ ┃ ┃ ┃ ┣ 📜6b5f682c5e599da1453090eac46ed87dc4c0e1
  ┃ ┃ ┃ ┗ 📜6c0e72c9d820600887813b3b98d0dd69c5d4e8
  ┃ ┃ ┣ 📂35
- ┃ ┃ ┃ ┗ 📜2c9c2e007cd03537b3fd96a218f0f33eaea9cf
+ ┃ ┃ ┃ ┣ 📜2c9c2e007cd03537b3fd96a218f0f33eaea9cf
+ ┃ ┃ ┃ ┣ 📜5a4b77c29d309c47c721a414f55aadce518869
+ ┃ ┃ ┃ ┣ 📜6253616fa47cce43fa90c51430e6a43b7ee4ed
+ ┃ ┃ ┃ ┗ 📜ac302cdee4c224ee04b27d8d3cea2bd25429e0
  ┃ ┃ ┣ 📂36
+ ┃ ┃ ┃ ┣ 📜47c5849f948f8eb5f9aa819fd6a4b3b1328c89
+ ┃ ┃ ┃ ┣ 📜4dd4ada86829814eb6e54da7b7ee318f2f5bfe
  ┃ ┃ ┃ ┗ 📜b0fd9464f45b33f482e64bea579787e142affa
+ ┃ ┃ ┣ 📂37
+ ┃ ┃ ┃ ┗ 📜ca2b6720e518a3f7d995e52cbcae529c47b56e
+ ┃ ┃ ┣ 📂39
+ ┃ ┃ ┃ ┗ 📜4fec53df9744c3095be322d89eeb222680a475
  ┃ ┃ ┣ 📂3c
+ ┃ ┃ ┃ ┣ 📜1d2e01981bfc1d10caadf78473bbf6abf9cb25
  ┃ ┃ ┃ ┗ 📜c05eb23491684aae1c51ce94668a142bad5125
+ ┃ ┃ ┣ 📂41
+ ┃ ┃ ┃ ┗ 📜9b8b8d289c9c3696d311b664a4f642f6ec3f8e
  ┃ ┃ ┣ 📂42
  ┃ ┃ ┃ ┗ 📜bcbf4780b187e80025b7917058bcb882012aa1
+ ┃ ┃ ┣ 📂44
+ ┃ ┃ ┃ ┗ 📜f9d81e51b3af945d4a294316cdc841dc1d81fe
  ┃ ┃ ┣ 📂46
  ┃ ┃ ┃ ┗ 📜a878f4777e720d8c84677072d06ece043a087e
  ┃ ┃ ┣ 📂47
@@ -149,29 +206,49 @@
  ┃ ┃ ┃ ┣ 📜591e80fcfaa61a870fa6c6056b8e022f7a13af
  ┃ ┃ ┃ ┗ 📜6e612bb35d62b172fd993d5e54d9666346ce98
  ┃ ┃ ┣ 📂49
+ ┃ ┃ ┃ ┣ 📜095880aca6ce6178b50e923a7969d0342bdb3c
  ┃ ┃ ┃ ┣ 📜9feaac40db776405ac020701b29e0f3563d460
  ┃ ┃ ┃ ┗ 📜ca960ea37144a81f0a2b86b4493f6bd88dd94a
  ┃ ┃ ┣ 📂4b
- ┃ ┃ ┃ ┗ 📜81f9b2d200fc807eed25bca04dff9ee9dcc45f
+ ┃ ┃ ┃ ┣ 📜81f9b2d200fc807eed25bca04dff9ee9dcc45f
+ ┃ ┃ ┃ ┗ 📜b2abb9dd33b73eaae7b2a2149a626bb89813f0
+ ┃ ┃ ┣ 📂4c
+ ┃ ┃ ┃ ┣ 📜ac2cf14fdb2dea53c934ed23de0b53dd7fae03
+ ┃ ┃ ┃ ┗ 📜d5f32085a07496f22491ef48a884e9b6b2982a
  ┃ ┃ ┣ 📂4d
  ┃ ┃ ┃ ┣ 📜bfbf26bb4b5718410f0d935911afc86afafbe4
  ┃ ┃ ┃ ┗ 📜f9a329c735296df20fd67697befab7e824a987
  ┃ ┃ ┣ 📂4f
+ ┃ ┃ ┃ ┣ 📜3d59fc6a12fb76089c7fa145b81677f150193d
  ┃ ┃ ┃ ┗ 📜c38e62ba1b2fb92159e867f7ecccc4d86ba2bb
+ ┃ ┃ ┣ 📂51
+ ┃ ┃ ┃ ┗ 📜e2794cfaa70c5516607badb07ca77f8d782a08
+ ┃ ┃ ┣ 📂52
+ ┃ ┃ ┃ ┣ 📜7ab5e6df79db302c536568f78b1853b6903e40
+ ┃ ┃ ┃ ┗ 📜e234e970a8d32bd77d7c76c22ee21cd5e44ae7
  ┃ ┃ ┣ 📂53
  ┃ ┃ ┃ ┗ 📜8b0be3bc8348219806701e4d66018b4d320be5
  ┃ ┃ ┣ 📂55
  ┃ ┃ ┃ ┗ 📜290521ad20e9e7579f0b009f9738843d49da22
  ┃ ┃ ┣ 📂56
+ ┃ ┃ ┃ ┣ 📜e66446ffba7d18020760f898f8957e45f9caba
  ┃ ┃ ┃ ┗ 📜efd5e214145786f39741944082ed960964ccea
  ┃ ┃ ┣ 📂57
  ┃ ┃ ┃ ┣ 📜52987e2f0ef8b3327a248bca84c7cb105e95e8
+ ┃ ┃ ┃ ┣ 📜cc79e28c547e699ba6438f87e526542ff86635
  ┃ ┃ ┃ ┗ 📜fc7c145ab3a2e11057f2166a5ca0e12e8e452a
+ ┃ ┃ ┣ 📂58
+ ┃ ┃ ┃ ┗ 📜763bdcf07f32750f96ad20c7bf8386c4d09058
  ┃ ┃ ┣ 📂59
- ┃ ┃ ┃ ┗ 📜a78b4e43468ce1260781dbd28f54c08969d8e9
+ ┃ ┃ ┃ ┣ 📜a78b4e43468ce1260781dbd28f54c08969d8e9
+ ┃ ┃ ┃ ┗ 📜e4431e59dc95d1cafac5366f920cdb213eedf0
  ┃ ┃ ┣ 📂5a
- ┃ ┃ ┃ ┗ 📜38aaefa07645061c546c1af31d9326989936d4
+ ┃ ┃ ┃ ┣ 📜07ab9cd3670d4c869bf9f927e7da7b4ac3eb40
+ ┃ ┃ ┃ ┣ 📜38aaefa07645061c546c1af31d9326989936d4
+ ┃ ┃ ┃ ┣ 📜71d418c691817f6f664b02c02041629d58c762
+ ┃ ┃ ┃ ┗ 📜7a864e29d8fda2b83c6a6c92354416e6f768de
  ┃ ┃ ┣ 📂5c
+ ┃ ┃ ┃ ┣ 📜1600dd04a06613311b01ad717bc2143d198005
  ┃ ┃ ┃ ┣ 📜aa9d1579e481a5894c37e2e56b0da062e95b35
  ┃ ┃ ┃ ┗ 📜e6269cfa9b3817073eebfaeda36201d0e5fc97
  ┃ ┃ ┣ 📂5f
@@ -179,24 +256,47 @@
  ┃ ┃ ┃ ┗ 📜444a60dfcdf4938dd2839e84dfb866e8ad273b
  ┃ ┃ ┣ 📂61
  ┃ ┃ ┃ ┗ 📜f3bd1fc504c3b78271416d8cfd14faa1dae2b4
+ ┃ ┃ ┣ 📂63
+ ┃ ┃ ┃ ┗ 📜7d9632a94bb4589b028f8e29817fd3fbb6cd8e
+ ┃ ┃ ┣ 📂64
+ ┃ ┃ ┃ ┗ 📜3b890d67d01bfdae8427c5bce421604711d7cb
  ┃ ┃ ┣ 📂67
- ┃ ┃ ┃ ┗ 📜54edf1714fb29ad75a98bd01485ef9442a22af
+ ┃ ┃ ┃ ┣ 📜11ff25375f0dd6421c6c3109984f0ca5923151
+ ┃ ┃ ┃ ┣ 📜54edf1714fb29ad75a98bd01485ef9442a22af
+ ┃ ┃ ┃ ┣ 📜7890cd2d02d78dec8a09e2b03b55add78908dc
+ ┃ ┃ ┃ ┗ 📜7cc8ce05ace20744618f88593efd298ea5aa1b
  ┃ ┃ ┣ 📂69
  ┃ ┃ ┃ ┗ 📜d66ce656fea7be0aeae1519120a88b6fa2f829
+ ┃ ┃ ┣ 📂6b
+ ┃ ┃ ┃ ┗ 📜bb711dbe26739c81f86a4fdf403c7581118459
  ┃ ┃ ┣ 📂6c
  ┃ ┃ ┃ ┗ 📜10964ab62a417fee0e5a0f0af7321893da80e9
+ ┃ ┃ ┣ 📂6e
+ ┃ ┃ ┃ ┗ 📜13b28ce175246ed329fac6975a30c0951c03f5
+ ┃ ┃ ┣ 📂6f
+ ┃ ┃ ┃ ┗ 📜0570a16cf87da0fa50f3bd49585fbce40bff7e
+ ┃ ┃ ┣ 📂72
+ ┃ ┃ ┃ ┗ 📜e86df5c1156465b4c3f84a6d89e94616c25c71
  ┃ ┃ ┣ 📂74
  ┃ ┃ ┃ ┗ 📜6adbb6b9e14b7e685c91e280a4d37a672afbd8
  ┃ ┃ ┣ 📂79
- ┃ ┃ ┃ ┗ 📜75b030944d093beb6d0670718e971e4c427ff8
+ ┃ ┃ ┃ ┣ 📜75b030944d093beb6d0670718e971e4c427ff8
+ ┃ ┃ ┃ ┗ 📜beb04135e4314e983b147057128aa03fed8915
  ┃ ┃ ┣ 📂7a
  ┃ ┃ ┃ ┗ 📜6e6dd2f52f35ed95825ab6c43d501d66885b7a
+ ┃ ┃ ┣ 📂7d
+ ┃ ┃ ┃ ┗ 📜eb7ef077a3d22720ba59708e8a2b920ce9b986
  ┃ ┃ ┣ 📂7e
  ┃ ┃ ┃ ┗ 📜dc8c88d117f311b43b77e62fab38e14b39eed1
+ ┃ ┃ ┣ 📂7f
+ ┃ ┃ ┃ ┗ 📜d188cac1870efa3dbdf09400fc4cf7d15baaf6
  ┃ ┃ ┣ 📂80
+ ┃ ┃ ┃ ┣ 📜7378b18e653ec9d0f1d99bf2c6ea15f4f20ef1
  ┃ ┃ ┃ ┗ 📜e867a4e06b4dc26d0a2b327cbd54041addc50a
  ┃ ┃ ┣ 📂82
  ┃ ┃ ┃ ┗ 📜b6f9d9a33e198f5747104729e1fcef999772a5
+ ┃ ┃ ┣ 📂83
+ ┃ ┃ ┃ ┗ 📜2b06a40ee4de7462dea38e6212c85457183ff3
  ┃ ┃ ┣ 📂84
  ┃ ┃ ┃ ┗ 📜11198d2b574279cbee6683a881b7d19f6b5f2b
  ┃ ┃ ┣ 📂85
@@ -207,6 +307,7 @@
  ┃ ┃ ┃ ┣ 📜3e0fbffef9857e868aca95a0e88cdc392c426a
  ┃ ┃ ┃ ┣ 📜48c6a7ccef32e9717c4d8019c9383212f03270
  ┃ ┃ ┃ ┣ 📜6cb273dcacfd649da794e0658e94128000800b
+ ┃ ┃ ┃ ┣ 📜e6757b840fc2d5fd38bb64bfe7c3fa5636e8cf
  ┃ ┃ ┃ ┗ 📜ea2f7e01af1f825752a9710580b5bbf0710d2f
  ┃ ┃ ┣ 📂88
  ┃ ┃ ┃ ┗ 📜d1a74f46bc6e45cc194be2e678b0b43f8ba386
@@ -216,21 +317,38 @@
  ┃ ┃ ┃ ┗ 📜f96a2c8ade099adb3fca57791d512ff901fc4a
  ┃ ┃ ┣ 📂8b
  ┃ ┃ ┃ ┗ 📜aa0971f2371716c15261c65b9d737edd2f7cdb
+ ┃ ┃ ┣ 📂8c
+ ┃ ┃ ┃ ┗ 📜20217d5e8b4918c014bd296dc549aa63b550a3
+ ┃ ┃ ┣ 📂8f
+ ┃ ┃ ┃ ┣ 📜5e98ba35e933926ddec2d05408a70b88a83445
+ ┃ ┃ ┃ ┗ 📜a60dabee56f04e1229a866e25d49dcac265711
  ┃ ┃ ┣ 📂93
  ┃ ┃ ┃ ┗ 📜a693717bc77f266a64b84fa3283c3b1285fc23
  ┃ ┃ ┣ 📂94
  ┃ ┃ ┃ ┗ 📜6fe751de30f10ae83099be9f8213cadc58b745
  ┃ ┃ ┣ 📂95
  ┃ ┃ ┃ ┗ 📜e1c9e562fcd0f4f3f2ec840334dc64c4878dc8
+ ┃ ┃ ┣ 📂96
+ ┃ ┃ ┃ ┣ 📜2ce010b21bf74a26153b4b8460a73fb05c1606
+ ┃ ┃ ┃ ┗ 📜6d0c69e49b8c2b465b23d0b802451b1121e77d
  ┃ ┃ ┣ 📂97
  ┃ ┃ ┃ ┗ 📜7761ede091730f09b4a7901fcde64f5cff59ab
  ┃ ┃ ┣ 📂98
- ┃ ┃ ┃ ┗ 📜37bad12b715e19bc7a320e0c594d39f0cd9306
+ ┃ ┃ ┃ ┣ 📜37bad12b715e19bc7a320e0c594d39f0cd9306
+ ┃ ┃ ┃ ┗ 📜e3951345f2d5211723d36951ab43e047dd66ba
+ ┃ ┃ ┣ 📂99
+ ┃ ┃ ┃ ┣ 📜77b9dd46c84c7b1c391d7c781eabac913e9bf2
+ ┃ ┃ ┃ ┗ 📜b8a3a7a4c813b12541a6f9ef51893c1b49cdad
  ┃ ┃ ┣ 📂9b
  ┃ ┃ ┃ ┗ 📜0bcd4d5b97aad296994161a36c7fd275701317
  ┃ ┃ ┣ 📂9c
+ ┃ ┃ ┃ ┣ 📜2ba1d6e543709c8dce0d8dda29d6be6a1bb72f
+ ┃ ┃ ┃ ┣ 📜5ad6b203f43310eed1170b36489a4833278f31
  ┃ ┃ ┃ ┗ 📜817eb2daead4eee3f3123445814bb479526d6d
+ ┃ ┃ ┣ 📂9d
+ ┃ ┃ ┃ ┗ 📜99fb536698d618e03cff0bb928f7e2bcf11d69
  ┃ ┃ ┣ 📂a1
+ ┃ ┃ ┃ ┣ 📜3b04ed7988dbf543a5abef6b5baf4117ab19c8
  ┃ ┃ ┃ ┗ 📜abbdcfbd1f57cd52c0e49ae67509cc2506b50c
  ┃ ┃ ┣ 📂a2
  ┃ ┃ ┃ ┗ 📜ec33f19f110ebff51a23342d7bc29ec9a1aaa6
@@ -240,85 +358,156 @@
  ┃ ┃ ┃ ┗ 📜f007d3ae3a26b922d9104a21524920c47d997c
  ┃ ┃ ┣ 📂a5
  ┃ ┃ ┃ ┣ 📜39d424aabdb07abead3dbc14d271595f9bc400
- ┃ ┃ ┃ ┗ 📜49d4866556ec8c0ec23ac7be078e10f07bd1ff
+ ┃ ┃ ┃ ┣ 📜49d4866556ec8c0ec23ac7be078e10f07bd1ff
+ ┃ ┃ ┃ ┗ 📜dc335c7fe9212c479361fe56ed94b8a9fbeca1
+ ┃ ┃ ┣ 📂aa
+ ┃ ┃ ┃ ┗ 📜6a0df992883c9f8ae6f6fabe1d2afb1d4bf5ce
+ ┃ ┃ ┣ 📂ac
+ ┃ ┃ ┃ ┗ 📜fcf1d1684d9ca4547d2c3ee1aa1fe6920ac38c
  ┃ ┃ ┣ 📂ad
- ┃ ┃ ┃ ┗ 📜bb730673889d7f101d7e13d8add3539b56e54b
+ ┃ ┃ ┃ ┣ 📜3bf30f05e45cf0e2b833d848446f8edc42a453
+ ┃ ┃ ┃ ┣ 📜6fdd51d2116e341acf10583e77bebb5d1f5dde
+ ┃ ┃ ┃ ┣ 📜a8b62554d0a010167c3720592cf6f5b22a4dbb
+ ┃ ┃ ┃ ┣ 📜bb730673889d7f101d7e13d8add3539b56e54b
+ ┃ ┃ ┃ ┗ 📜de5c50b572230395a3f0495793186403c271ee
  ┃ ┃ ┣ 📂ae
+ ┃ ┃ ┃ ┣ 📜3212e637ce9330e3c8da2b86f989953e0bd381
  ┃ ┃ ┃ ┗ 📜73cd3af7e34c03867d744ab9ffdeb27276676c
  ┃ ┃ ┣ 📂af
  ┃ ┃ ┃ ┗ 📜b034d2b95a7257be6943858a14f5b21d32dad2
  ┃ ┃ ┣ 📂b3
  ┃ ┃ ┃ ┗ 📜c176141221dbe2b40d3e36942b15068ba48677
+ ┃ ┃ ┣ 📂b6
+ ┃ ┃ ┃ ┗ 📜9714070bd3174f75636910f3465a48d37df699
  ┃ ┃ ┣ 📂b7
+ ┃ ┃ ┃ ┣ 📜252c956f67fdf17795b3cc3ccd74ada86c4b72
  ┃ ┃ ┃ ┗ 📜ca530a8253cdbd8c527a2c329e6b5b820f4e7e
+ ┃ ┃ ┣ 📂b8
+ ┃ ┃ ┃ ┗ 📜d2ae55bf9c58d9e20a3f0613851171c2a4cc72
  ┃ ┃ ┣ 📂ba
- ┃ ┃ ┃ ┗ 📜f3d77f76706dbc82162dd6bc9a1365ac5be830
+ ┃ ┃ ┃ ┣ 📜f3d77f76706dbc82162dd6bc9a1365ac5be830
+ ┃ ┃ ┃ ┗ 📜f6cb1e0b67351636aa98039f08b94a1bdcb30a
  ┃ ┃ ┣ 📂bd
  ┃ ┃ ┃ ┗ 📜b57226d5f2bd20f11934f4903f16459cf52379
  ┃ ┃ ┣ 📂bf
+ ┃ ┃ ┃ ┣ 📜6c2a0bb873d65e867e5834777fb0c3a1cc0d7d
  ┃ ┃ ┃ ┗ 📜8d421859d4c30d41c0f25d6441a14aed47f102
+ ┃ ┃ ┣ 📂c2
+ ┃ ┃ ┃ ┗ 📜a86e7b7246e4f70101ccf8e6ea29997237a607
+ ┃ ┃ ┣ 📂c3
+ ┃ ┃ ┃ ┗ 📜4ea9d370474d6f72fbe333c0de40638f23c7e7
  ┃ ┃ ┣ 📂c4
+ ┃ ┃ ┃ ┣ 📜1e8e2faf6b7dbb39acaa1bcbf69dda1d7bc988
  ┃ ┃ ┃ ┗ 📜3cc9b8ba4e4ae5c6df5ed5e3f199668b7fead0
  ┃ ┃ ┣ 📂c6
- ┃ ┃ ┃ ┗ 📜2b8d9350dc139a4c959e44d85a0b50a0acdadc
+ ┃ ┃ ┃ ┣ 📜1ed6e7c745738a3a284da857343fb4de24d8fc
+ ┃ ┃ ┃ ┣ 📜2b8d9350dc139a4c959e44d85a0b50a0acdadc
+ ┃ ┃ ┃ ┗ 📜af80a10d8847ea779042da9d9f09ee11dce9c9
+ ┃ ┃ ┣ 📂c8
+ ┃ ┃ ┃ ┗ 📜49c32fd911878cff972959f3624883c696c701
  ┃ ┃ ┣ 📂c9
+ ┃ ┃ ┃ ┣ 📜06ae55f6d4779f9ace29376fb33ad65b5f2a75
  ┃ ┃ ┃ ┗ 📜efd72db33a43eacc24e937eed649e402bd9d50
+ ┃ ┃ ┣ 📂cb
+ ┃ ┃ ┃ ┗ 📜4f0b07ef55c5351dec7031ae4389a64d059f9a
  ┃ ┃ ┣ 📂cc
  ┃ ┃ ┃ ┣ 📜434f7deeb43953979d3448b6ee26c6992770f9
  ┃ ┃ ┃ ┗ 📜6b0a8a1ab9a65145af8f3e198ab015f0be937c
+ ┃ ┃ ┣ 📂ce
+ ┃ ┃ ┃ ┣ 📜dfcd210a1c3c86e8fa2fc7d1a05b6dd244e532
+ ┃ ┃ ┃ ┗ 📜efce7ab0648f12a04d08aca57e6c746c42046c
  ┃ ┃ ┣ 📂d0
- ┃ ┃ ┃ ┗ 📜651fda5fbc1e0e728fe38d2abc65f7250c177d
+ ┃ ┃ ┃ ┣ 📜651fda5fbc1e0e728fe38d2abc65f7250c177d
+ ┃ ┃ ┃ ┗ 📜687770941f2539c6b946a24668941078ae425b
+ ┃ ┃ ┣ 📂d1
+ ┃ ┃ ┃ ┗ 📜df5c880df68585679066ff26b5b8c132aa2843
  ┃ ┃ ┣ 📂d2
  ┃ ┃ ┃ ┣ 📜4f91f7e05df98b8ebab4c16e8d9ab7acf24605
  ┃ ┃ ┃ ┗ 📜f41516d561307eecb0424efc66907d9ad2871f
+ ┃ ┃ ┣ 📂d3
+ ┃ ┃ ┃ ┗ 📜192696e7d5006e4e7b091016f245d741570122
  ┃ ┃ ┣ 📂d4
+ ┃ ┃ ┃ ┣ 📜38a29c10c8e17ab219218315b7efdde91a959a
  ┃ ┃ ┃ ┗ 📜4ce0608964cd2f11c8071abe4fa833294085e3
  ┃ ┃ ┣ 📂da
  ┃ ┃ ┃ ┗ 📜bd7ce095be2f484af48794c03d746869130c32
+ ┃ ┃ ┣ 📂db
+ ┃ ┃ ┃ ┗ 📜da3f18596ad22572423899af8697da194c7dad
  ┃ ┃ ┣ 📂dd
+ ┃ ┃ ┃ ┣ 📜88671e81e0fe6fa3879c1a9e3793b41e982181
  ┃ ┃ ┃ ┗ 📜db8a30c851e7ef5b16a9108934bd1217b6b43f
+ ┃ ┃ ┣ 📂de
+ ┃ ┃ ┃ ┗ 📜d9f312076359d48b0c291325d64b7f22d05dae
  ┃ ┃ ┣ 📂df
+ ┃ ┃ ┃ ┣ 📜11264fc164797c4292433e2e88e5288f9114ff
  ┃ ┃ ┃ ┗ 📜f4f49561c816f70eaea557d889d31cf63447ac
  ┃ ┃ ┣ 📂e0
+ ┃ ┃ ┃ ┣ 📜706ba0b90a5faaf08cbcba91ac3f9d9fecdb9b
  ┃ ┃ ┃ ┗ 📜f4ba9e49ad39d5045d59b6e141d1587c6ef1e6
  ┃ ┃ ┣ 📂e2
- ┃ ┃ ┃ ┗ 📜287f76c50d6a11066ef7aff98c139164ef4b25
+ ┃ ┃ ┃ ┣ 📜1ec157eac0e1e0353752a26d368139f7fa675c
+ ┃ ┃ ┃ ┣ 📜287f76c50d6a11066ef7aff98c139164ef4b25
+ ┃ ┃ ┃ ┗ 📜83ea05559dbf85a8ef28ca90f4377ed74e5078
  ┃ ┃ ┣ 📂e3
  ┃ ┃ ┃ ┗ 📜3142e71bfc751ce1d7a7d46406235425786005
  ┃ ┃ ┣ 📂e4
  ┃ ┃ ┃ ┗ 📜bbe6a2f87ae81ccdbd59e3a1c8d28904f2492e
  ┃ ┃ ┣ 📂e5
- ┃ ┃ ┃ ┗ 📜3b692cc6bac9a5893606bfb281eefa0181d8c6
+ ┃ ┃ ┃ ┣ 📜3b692cc6bac9a5893606bfb281eefa0181d8c6
+ ┃ ┃ ┃ ┣ 📜64e23e5ecf675cf5116fc927a2e9a6a8d6a23a
+ ┃ ┃ ┃ ┗ 📜82fca6990e0e7a1dd5affb868f42f69a331731
  ┃ ┃ ┣ 📂e6
  ┃ ┃ ┃ ┣ 📜3dcdab16f8d6711494416846bf9b86d0c186cd
  ┃ ┃ ┃ ┗ 📜54aaafcd8288add0a8209e6a3b4ae4a59df8f1
+ ┃ ┃ ┣ 📂e7
+ ┃ ┃ ┃ ┗ 📜c34c9ca956bd5dcd6f6ea2d8f5be1f822e94c2
+ ┃ ┃ ┣ 📂e8
+ ┃ ┃ ┃ ┗ 📜7052355a76bd8cab1910d64f62683396d2e45e
  ┃ ┃ ┣ 📂e9
  ┃ ┃ ┃ ┗ 📜2e779b6167fb8b39eb66933b56000e0b30d042
+ ┃ ┃ ┣ 📂eb
+ ┃ ┃ ┃ ┗ 📜3dd8fb88ee0f203e22bc7d0022bfa981a45677
  ┃ ┃ ┣ 📂ed
  ┃ ┃ ┃ ┗ 📜3996cc9c345467086c27bb9b5f66983e2371ba
+ ┃ ┃ ┣ 📂ee
+ ┃ ┃ ┃ ┗ 📜567744002c43658adbbc8eb52da62f1090052c
  ┃ ┃ ┣ 📂f0
  ┃ ┃ ┃ ┗ 📜83318e09ca1b6b8484b1694a149f0c5d5cac1d
+ ┃ ┃ ┣ 📂f3
+ ┃ ┃ ┃ ┗ 📜df6bdb3f69a4648121d494444bcff97c3ce72d
  ┃ ┃ ┣ 📂f4
+ ┃ ┃ ┃ ┣ 📜89e78038b4da785c42613a8f9bf09789634edc
+ ┃ ┃ ┃ ┣ 📜8a4e9aa72ab0f1ef5d5911d61e23acafe342ce
+ ┃ ┃ ┃ ┣ 📜c77141eb970b9a5e5b58f07611bd4412c98f77
  ┃ ┃ ┃ ┣ 📜e123bf75c4aba0765bac81546e539fade2828c
  ┃ ┃ ┃ ┗ 📜f6dbdbfcfdc9ea12d45197049e9dabcf6850e3
+ ┃ ┃ ┣ 📂f5
+ ┃ ┃ ┃ ┣ 📜2caff38240e64434d736ee857685baef652b13
+ ┃ ┃ ┃ ┗ 📜5a7d4e7073324defd13a31e0507d4c354de61b
  ┃ ┃ ┣ 📂f6
  ┃ ┃ ┃ ┗ 📜9b1abd9c89f0a0184397b149d91d9759f8931c
+ ┃ ┃ ┣ 📂f8
+ ┃ ┃ ┃ ┣ 📜e2bc78bc888cdd52792ec17da7a436922a2edf
+ ┃ ┃ ┃ ┗ 📜ee41de15cf91c495a92049a913edefa49beafa
  ┃ ┃ ┣ 📂f9
  ┃ ┃ ┃ ┗ 📜78a1afeac816f63d5f29f73cf2b9954d3f7c83
  ┃ ┃ ┣ 📂fa
  ┃ ┃ ┃ ┣ 📜0feb28d9c17ae02923637b8b55e221726f3201
+ ┃ ┃ ┃ ┣ 📜5a5d5c040817aaf42875b0130717750080ae34
  ┃ ┃ ┃ ┗ 📜e1166f3a826beece64af8501df6b9f52a93189
  ┃ ┃ ┣ 📂fd
  ┃ ┃ ┃ ┗ 📜8b6f6971c6cef2806027dba3aa8b5d826c0fbf
+ ┃ ┃ ┣ 📂fe
+ ┃ ┃ ┃ ┗ 📜6ac1de1a2ee82ee88581d6b7fb1ddcded4474c
  ┃ ┃ ┣ 📂ff
  ┃ ┃ ┃ ┣ 📜5ddb3b8bdcd02db4e59cb12b3488f81ea0bb09
  ┃ ┃ ┃ ┗ 📜c6b94794ccc15f2daa4dcdbc292b503343c49e
  ┃ ┃ ┣ 📂info
  ┃ ┃ ┃ ┗ 📂commit-graphs
  ┃ ┃ ┃ ┃ ┣ 📜commit-graph-chain
- ┃ ┃ ┃ ┃ ┣ 📜graph-04f065b24e4e2beb1a8f5dbb3e8f7ec29c842c69.graph
- ┃ ┃ ┃ ┃ ┣ 📜graph-dd93bae4546a6d75783e9b3040a8f13539d66b71.graph
- ┃ ┃ ┃ ┃ ┗ 📜graph-f3022de6d9307de1b6f4410b5232418e698785b7.graph
+ ┃ ┃ ┃ ┃ ┣ 📜graph-10986513613c762bb913fafc581e6957acb68d11.graph
+ ┃ ┃ ┃ ┃ ┣ 📜graph-96e451de0dc8b896a0ed082729ba281cc8073b31.graph
+ ┃ ┃ ┃ ┃ ┗ 📜graph-dd93bae4546a6d75783e9b3040a8f13539d66b71.graph
  ┃ ┃ ┗ 📂pack
  ┃ ┃ ┃ ┣ 📜pack-ed05dbeefb857cca99af11a06c9246ce4ae41611.idx
  ┃ ┃ ┃ ┣ 📜pack-ed05dbeefb857cca99af11a06c9246ce4ae41611.pack
@@ -331,8 +520,10 @@
  ┃ ┃ ┣ 📂remotes
  ┃ ┃ ┃ ┗ 📂origin
  ┃ ┃ ┃ ┃ ┣ 📜HEAD
- ┃ ┃ ┃ ┃ ┗ 📜main
+ ┃ ┃ ┃ ┃ ┣ 📜main
+ ┃ ┃ ┃ ┃ ┗ 📜main_phase2
  ┃ ┃ ┗ 📂tags
+ ┃ ┃ ┃ ┗ 📜phase2-complete
  ┃ ┣ 📜COMMIT_EDITMSG
  ┃ ┣ 📜FETCH_HEAD
  ┃ ┣ 📜HEAD
@@ -5734,6 +5925,9 @@
  ┃ ┃ ┃ ┃ ┣ 📜LICENSE
  ┃ ┃ ┃ ┃ ┣ 📜README.md
  ┃ ┃ ┃ ┃ ┗ 📜pubspec.yaml
+ ┃ ┣ 📂native_assets
+ ┃ ┃ ┗ 📂macos
+ ┃ ┃ ┃ ┗ 📜native_assets.json
  ┃ ┣ 📂reports
  ┃ ┃ ┗ 📂problems
  ┃ ┃ ┃ ┗ 📜problems-report.html
@@ -6025,7 +6219,7 @@
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜StringListObjectInputStream.class
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜StringListResult$Companion.class
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜StringListResult.class
- ┃ ┗ 📂sqflite
+ ┃ ┣ 📂sqflite
  ┃ ┃ ┣ 📂generated
  ┃ ┃ ┃ ┣ 📂ap_generated_sources
  ┃ ┃ ┃ ┃ ┗ 📂release
@@ -6252,8 +6446,69 @@
  ┃ ┃ ┗ 📂tmp
  ┃ ┃ ┃ ┗ 📂compileReleaseJavaWithJavac
  ┃ ┃ ┃ ┃ ┗ 📜previous-compilation-data.bin
+ ┃ ┣ 📂test_cache
+ ┃ ┃ ┣ 📂build
+ ┃ ┃ ┃ ┗ 📜2899434a97c10bb3a4e1f0b50638ff3a.cache.dill.track.dill
+ ┃ ┃ ┗ 📜flavor.txt
+ ┃ ┗ 📂unit_test_assets
+ ┃ ┃ ┣ 📂assets
+ ┃ ┃ ┃ ┣ 📂data
+ ┃ ┃ ┃ ┃ ┣ 📜README.md
+ ┃ ┃ ┃ ┃ ┗ 📜vietnam_legacy_districts.json
+ ┃ ┃ ┃ ┣ 📂fonts
+ ┃ ┃ ┃ ┃ ┣ 📜BeVietnamPro-Bold.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜BeVietnamPro-Italic.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜BeVietnamPro-Light.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜BeVietnamPro-Medium.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜BeVietnamPro-Regular.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜BeVietnamPro-SemiBold.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜Satoshi-Black.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜Satoshi-Bold.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜Satoshi-Light.ttf
+ ┃ ┃ ┃ ┃ ┣ 📜Satoshi-Medium.ttf
+ ┃ ┃ ┃ ┃ ┗ 📜Satoshi-Regular.ttf
+ ┃ ┃ ┃ ┣ 📂images
+ ┃ ┃ ┃ ┃ ┣ 📂projects
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜modern_townhouse.jpg
+ ┃ ┃ ┃ ┃ ┣ 📜app_launcher_icon.png
+ ┃ ┃ ┃ ┃ ┣ 📜app_logo.png
+ ┃ ┃ ┃ ┃ ┣ 📜splash_logo.png
+ ┃ ┃ ┃ ┃ ┗ 📜splash_logo_android12.png
+ ┃ ┃ ┃ ┗ 📂vectors
+ ┃ ┃ ┃ ┃ ┣ 📜Setting.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_back.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_file.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_heart.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_heart_active.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_home.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_home_active.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_profile.svg
+ ┃ ┃ ┃ ┃ ┣ 📜ic_profile_active.svg
+ ┃ ┃ ┃ ┃ ┣ 📜moon.svg
+ ┃ ┃ ┃ ┃ ┗ 📜sun.svg
+ ┃ ┃ ┣ 📂fonts
+ ┃ ┃ ┃ ┗ 📜MaterialIcons-Regular.otf
+ ┃ ┃ ┣ 📂lib
+ ┃ ┃ ┃ ┗ 📂l10n
+ ┃ ┃ ┃ ┃ ┣ 📜en.json
+ ┃ ┃ ┃ ┃ ┗ 📜vi.json
+ ┃ ┃ ┣ 📂packages
+ ┃ ┃ ┃ ┣ 📂cupertino_icons
+ ┃ ┃ ┃ ┃ ┗ 📂assets
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜CupertinoIcons.ttf
+ ┃ ┃ ┃ ┗ 📂flutter_local_notifications_web
+ ┃ ┃ ┃ ┃ ┗ 📂web
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜notifications_service_worker.js
+ ┃ ┃ ┣ 📂shaders
+ ┃ ┃ ┃ ┣ 📜ink_sparkle.frag
+ ┃ ┃ ┃ ┗ 📜stretch_effect.frag
+ ┃ ┃ ┣ 📜.env.dev
+ ┃ ┃ ┣ 📜.env.prod
+ ┃ ┃ ┣ 📜AssetManifest.bin
+ ┃ ┃ ┣ 📜FontManifest.json
+ ┃ ┃ ┣ 📜NOTICES.Z
+ ┃ ┃ ┗ 📜NativeAssetsManifest.json
  ┣ 📂dist
- ┃ ┗ 📜construction-plan-main-v1.0.5-prod-test.apk
  ┣ 📂docs
  ┃ ┣ 📜ARCHITECTURE.md
  ┃ ┗ 📜FIREBASE_SETUP.md
@@ -6480,11 +6735,9 @@
  ┃ ┃ ┣ 📂services
  ┃ ┃ ┃ ┣ 📜foundation_structure_calculator.dart
  ┃ ┃ ┃ ┗ 📜material_calculator.dart
- ┃ ┃ ┣ 📂utils
+ ┃ ┃ ┗ 📂utils
  ┃ ┃ ┃ ┣ 📜calculation_utils.dart
- ┃ ┃ ┃ ┣ 📜number_formatter.dart
- ┃ ┃ ┃ ┗ 📜wall_calculator.dart
- ┃ ┃ ┗ 📜.DS_Store
+ ┃ ┃ ┃ ┗ 📜number_formatter.dart
  ┃ ┣ 📂common
  ┃ ┃ ┣ 📂helpers
  ┃ ┃ ┃ ┗ 📜is_dark_mode.dart
@@ -6583,8 +6836,16 @@
  ┃ ┃ ┃ ┃ ┣ 📂repositories
  ┃ ┃ ┃ ┃ ┃ ┗ 📜project_repository.dart
  ┃ ┃ ┃ ┃ ┣ 📂services
- ┃ ┃ ┃ ┃ ┃ ┗ 📜project_cost_estimator.dart
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂calculation
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜calculation_service.dart
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜legacy_calculation_service.dart
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜legacy_input_mapper.dart
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜legacy_material_selection_key_mapper.dart
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜legacy_result_mapper.dart
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜mock_calculation_service.dart
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜project_calculation_result.dart
  ┃ ┃ ┃ ┃ ┗ 📂usecases
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜calculate_project.dart
  ┃ ┃ ┃ ┃ ┃ ┣ 📜get_projects.dart
  ┃ ┃ ┃ ┃ ┃ ┗ 📜save_project.dart
  ┃ ┃ ┃ ┗ 📂presentation
@@ -7536,11 +7797,66 @@
  ┃ ┣ 📜Podfile
  ┃ ┗ 📜Podfile.lock
  ┣ 📂test
+ ┃ ┣ 📂e2e
+ ┃ ┃ ┗ 📜project_calculation_persistence_e2e_test.dart
+ ┃ ┣ 📂golden
+ ┃ ┃ ┣ 📂cases
+ ┃ ┃ ┃ ┣ 📜canonical_cases.dart
+ ┃ ┃ ┃ ┗ 📜golden_cases.dart
+ ┃ ┃ ┣ 📂expected
+ ┃ ┃ ┃ ┣ 📜golden_brick_dimensions_runtime.json
+ ┃ ┃ ┃ ┣ 📜golden_custom_material_no_code.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_bang_balanced_d16.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_bang_lech_1_ben_d18.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_bang_lech_2_ben_d20.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_coc_d22.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_coc_pile_d16.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_no_columns.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_pile_no_caps.json
+ ┃ ┃ ┃ ┣ 📜golden_foundation_two_floors_h_total.json
+ ┃ ┃ ┃ ┣ 📜golden_integration_case_a.json
+ ┃ ┃ ┃ ┣ 📜golden_integration_case_b.json
+ ┃ ┃ ┃ ┣ 📜golden_integration_case_c.json
+ ┃ ┃ ┃ ┣ 📜golden_material_aluminum_door.json
+ ┃ ┃ ┃ ┣ 📜golden_material_brick.json
+ ┃ ┃ ┃ ┣ 📜golden_material_cement.json
+ ┃ ┃ ┃ ┣ 📜golden_material_concrete_sand.json
+ ┃ ┃ ┃ ┣ 📜golden_material_gypsum.json
+ ┃ ┃ ┃ ┣ 📜golden_material_interior_paint.json
+ ┃ ┃ ┃ ┣ 📜golden_material_labor.json
+ ┃ ┃ ┃ ┣ 📜golden_material_plaster_sand.json
+ ┃ ┃ ┃ ┣ 📜golden_material_plumbing_labor.json
+ ┃ ┃ ┃ ┣ 📜golden_material_plumbing_material.json
+ ┃ ┃ ┃ ┣ 📜golden_material_sand.json
+ ┃ ┃ ┃ ┣ 📜golden_material_steel.json
+ ┃ ┃ ┃ ┣ 📜golden_material_stone.json
+ ┃ ┃ ┃ ┣ 📜golden_materials_no_aggregated_key.json
+ ┃ ┃ ┃ ┣ 📜golden_openings_doors.json
+ ┃ ┃ ┃ ┣ 📜golden_openings_mixed_all_quantity.json
+ ┃ ┃ ┃ ┣ 📜golden_openings_mixed_walls_two_floors.json
+ ┃ ┃ ┃ ┣ 📜golden_openings_rolling_doors.json
+ ┃ ┃ ┃ ┣ 📜golden_openings_windows.json
+ ┃ ┃ ┃ ┣ 📜golden_steel_d14.json
+ ┃ ┃ ┃ ┣ 📜golden_steel_d16.json
+ ┃ ┃ ┃ ┣ 📜golden_steel_d18.json
+ ┃ ┃ ┃ ┣ 📜golden_steel_d20.json
+ ┃ ┃ ┃ ┣ 📜golden_steel_d22.json
+ ┃ ┃ ┃ ┣ 📜golden_wall_100_plaster_0.json
+ ┃ ┃ ┃ ┣ 📜golden_wall_100_plaster_1.json
+ ┃ ┃ ┃ ┣ 📜golden_wall_100_plaster_2.json
+ ┃ ┃ ┃ ┣ 📜golden_wall_200_plaster_0.json
+ ┃ ┃ ┃ ┣ 📜golden_wall_200_plaster_1.json
+ ┃ ┃ ┃ ┣ 📜golden_wall_200_plaster_2.json
+ ┃ ┃ ┃ ┗ 📜golden_walls_mixed_100_200.json
+ ┃ ┃ ┣ 📜README.md
+ ┃ ┃ ┗ 📜golden_regression_test.dart
+ ┃ ┣ 📜.DS_Store
+ ┃ ┣ 📜calculation_service_test.dart
  ┃ ┣ 📜construction_plan_app_test.dart
  ┃ ┣ 📜featured_project_navigation_test.dart
+ ┃ ┣ 📜legacy_input_mapper_test.dart
  ┃ ┣ 📜material_library_cubit_test.dart
  ┃ ┣ 📜material_library_database_test.dart
- ┃ ┣ 📜project_cost_estimator_test.dart
  ┃ ┣ 📜project_database_test.dart
  ┃ ┣ 📜project_detail_widget_test.dart
  ┃ ┣ 📜project_wizard_cubit_test.dart
@@ -7548,6 +7864,34 @@
  ┃ ┣ 📜vietnamese_currency_input_formatter_test.dart
  ┃ ┗ 📜widget_test.dart
  ┣ 📂tool
+ ┃ ┣ 📂golden
+ ┃ ┃ ┣ 📂oracle_src
+ ┃ ┃ ┃ ┣ 📂models
+ ┃ ┃ ┃ ┃ ┣ 📂project
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜foundation_structure_model.dart
+ ┃ ┃ ┃ ┃ ┣ 📜brick.dart
+ ┃ ┃ ┃ ┃ ┗ 📜material_model.dart
+ ┃ ┃ ┃ ┣ 📂services
+ ┃ ┃ ┃ ┃ ┣ 📂calculators
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜brick_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜cement_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜custom_material_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜door_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜paint_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜sand_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜steel_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜stone_calculator.dart
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜tile_calculator.dart
+ ┃ ┃ ┃ ┃ ┣ 📂constants
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜construction_constants.dart
+ ┃ ┃ ┃ ┃ ┣ 📂utils
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜calculation_utils.dart
+ ┃ ┃ ┃ ┃ ┣ 📜foundation_structure_calculator.dart
+ ┃ ┃ ┃ ┃ ┗ 📜material_calculator.dart
+ ┃ ┃ ┃ ┗ 📂utils
+ ┃ ┃ ┃ ┃ ┗ 📜number_formatter.dart
+ ┃ ┃ ┣ 📜generate_expected.dart
+ ┃ ┃ ┗ 📜sync_oracle.dart
  ┃ ┣ 📜add_ios_flavors.rb
  ┃ ┣ 📜add_macos_flavors.rb
  ┃ ┣ 📜build_ios.sh
@@ -7582,7 +7926,9 @@
  ┣ 📜.gitignore
  ┣ 📜.metadata
  ┣ 📜CLEANUP_GUIDE.md
- ┣ 📜PHASE2_AI_AGENT_EXECUTION_PLAN.md
+ ┣ 📜PHASE2_AI_AGENT_EXECUTION_PLAN_UPDATED.md
+ ┣ 📜PHASE2_CALCULATION_CORE_MANIFEST.md
+ ┣ 📜PHASE2_MAPPING_SPEC.md
  ┣ 📜README.md
  ┣ 📜SCAN_CODEBASE.md
  ┣ 📜analysis_options.yaml
