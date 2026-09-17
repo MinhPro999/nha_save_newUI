@@ -1,0 +1,34 @@
+{
+  "sourceSha": "e5fc8943daaab5953c75bd161061cd83a934b5fd",
+  "generatedAt": "2026-09-16T16:42:17.543555Z",
+  "caseId": "golden_foundation_bang_lech_1_ben_d18",
+  "material": {
+    "quantities": {},
+    "costs": {},
+    "intermediateResults": {}
+  },
+  "foundation": {
+    "columnConcreteM3": 0.792,
+    "foundationConcreteM3": 2.25,
+    "totalConcreteM3": 3.042,
+    "columnCementKg": 340.56,
+    "columnSandM3": 0.35640000000000005,
+    "columnStoneM3": 0.6811200000000001,
+    "columnWaterL": 146.52,
+    "foundationCementKg": 967.5,
+    "foundationSandM3": 1.0125,
+    "foundationStoneM3": 1.935,
+    "foundationWaterL": 416.25,
+    "totalCementKg": 1308.06,
+    "totalSandM3": 1.3689,
+    "totalStoneM3": 2.61612,
+    "totalWaterL": 562.77,
+    "columnSteelKg": 127.67999999999999,
+    "foundationSteelKg": 126.0,
+    "totalSteelKg": 253.68,
+    "cementBags50kg": 27,
+    "cementTon": 1.30806,
+    "steelTon": 0.25368,
+    "waterM3": 0.56277
+  }
+}

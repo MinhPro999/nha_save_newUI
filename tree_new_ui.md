@@ -73,7 +73,8 @@
  ┃ ┣ 📂logs
  ┃ ┃ ┣ 📂refs
  ┃ ┃ ┃ ┣ 📂heads
- ┃ ┃ ┃ ┃ ┗ 📜main
+ ┃ ┃ ┃ ┃ ┣ 📜main
+ ┃ ┃ ┃ ┃ ┗ 📜main_phase2
  ┃ ┃ ┃ ┗ 📂remotes
  ┃ ┃ ┃ ┃ ┗ 📂origin
  ┃ ┃ ┃ ┃ ┃ ┣ 📜HEAD
@@ -82,31 +83,76 @@
  ┃ ┣ 📂objects
  ┃ ┃ ┣ 📂02
  ┃ ┃ ┃ ┗ 📜afbe4fd2cc6d184274d91657fb62e496bf3f6a
+ ┃ ┃ ┣ 📂03
+ ┃ ┃ ┃ ┣ 📜3b9c9faaa6d48bc9cf95ba9bcb70c38d308fd5
+ ┃ ┃ ┃ ┗ 📜fb3ce066cde020b9d467ccd4a2663ce12fbd04
  ┃ ┃ ┣ 📂04
  ┃ ┃ ┃ ┣ 📜26a5fd6fbcdac690b5f89d36e331d8025b86de
  ┃ ┃ ┃ ┗ 📜d3874aa63316427030e51677e9b9ad1d4a5999
  ┃ ┃ ┣ 📂07
+ ┃ ┃ ┃ ┣ 📜386902e01f466cedbc09062c86c3d6e40596ea
  ┃ ┃ ┃ ┗ 📜b661faec59e4de6cd5b2f09b7d2bf1e73b9b61
+ ┃ ┃ ┣ 📂0a
+ ┃ ┃ ┃ ┣ 📜20fe5b2d5eea36fdbfd3cecb206826b25013bc
+ ┃ ┃ ┃ ┗ 📜3f5fa40fb3d1e0710331a48de5d256da3f275d
+ ┃ ┃ ┣ 📂0c
+ ┃ ┃ ┃ ┗ 📜d497058b5e12e69dfb0e053959ba6f4726d745
+ ┃ ┃ ┣ 📂0e
+ ┃ ┃ ┃ ┗ 📜df7dae087c542316736c9a020e8dd3d95de75b
+ ┃ ┃ ┣ 📂0f
+ ┃ ┃ ┃ ┗ 📜a7eabc1dca6d830eccf0c7549277c0c6a1fbf2
+ ┃ ┃ ┣ 📂10
+ ┃ ┃ ┃ ┗ 📜f14642f456425bf0b36f854ea1a238c411ab32
  ┃ ┃ ┣ 📂13
- ┃ ┃ ┃ ┗ 📜477c11d0540b384cfe8fb0a1bb59098a2425b2
+ ┃ ┃ ┃ ┣ 📜477c11d0540b384cfe8fb0a1bb59098a2425b2
+ ┃ ┃ ┃ ┗ 📜b35eba55c6dabc3aac36f33d859266c18fa0d0
  ┃ ┃ ┣ 📂17
  ┃ ┃ ┃ ┗ 📜4f99a444f9acc87b88f600bd4a702c60ea1175
+ ┃ ┃ ┣ 📂18
+ ┃ ┃ ┃ ┗ 📜cf57977c8b41693b86190a977ca683635418d4
  ┃ ┃ ┣ 📂1f
  ┃ ┃ ┃ ┗ 📜87a5ca0c604dda22b9be88150682c4395d4d99
  ┃ ┃ ┣ 📂22
+ ┃ ┃ ┃ ┣ 📜4f094357960ee93774e1de1d409aa5ffe2e938
  ┃ ┃ ┃ ┗ 📜71dac39169b536867cd6da69a44c96de201a62
+ ┃ ┃ ┣ 📂23
+ ┃ ┃ ┃ ┗ 📜e2e5382078317e5c65779e3ed1919a16ebfb79
+ ┃ ┃ ┣ 📂26
+ ┃ ┃ ┃ ┣ 📜66c430c694d236d66b9373915fdd6b722bac11
+ ┃ ┃ ┃ ┗ 📜e6c91895bcc410a86dd32ddf76642338070fc6
+ ┃ ┃ ┣ 📂28
+ ┃ ┃ ┃ ┗ 📜c77403e5add5601147b59bce80d3dc51c4cbd3
+ ┃ ┃ ┣ 📂2a
+ ┃ ┃ ┃ ┗ 📜7811f2d0ef20233ed066c8e7241a69a757ed87
  ┃ ┃ ┣ 📂2b
  ┃ ┃ ┃ ┗ 📜ad2a10be0bcc7b26c9e667d9803e2c9dcfa4a4
  ┃ ┃ ┣ 📂2e
  ┃ ┃ ┃ ┗ 📜da5694134193b5e3747dca8666ce3e8a2886eb
+ ┃ ┃ ┣ 📂2f
+ ┃ ┃ ┃ ┗ 📜1632cfddf3d9dade342351e627a0a75609fb46
  ┃ ┃ ┣ 📂32
- ┃ ┃ ┃ ┗ 📜33cd8e2c609df19e3f9f57bc38208b87a4dfa9
+ ┃ ┃ ┃ ┣ 📜33cd8e2c609df19e3f9f57bc38208b87a4dfa9
+ ┃ ┃ ┃ ┗ 📜6c0e72c9d820600887813b3b98d0dd69c5d4e8
+ ┃ ┃ ┣ 📂35
+ ┃ ┃ ┃ ┗ 📜2c9c2e007cd03537b3fd96a218f0f33eaea9cf
+ ┃ ┃ ┣ 📂36
+ ┃ ┃ ┃ ┗ 📜b0fd9464f45b33f482e64bea579787e142affa
+ ┃ ┃ ┣ 📂3c
+ ┃ ┃ ┃ ┗ 📜c05eb23491684aae1c51ce94668a142bad5125
+ ┃ ┃ ┣ 📂42
+ ┃ ┃ ┃ ┗ 📜bcbf4780b187e80025b7917058bcb882012aa1
+ ┃ ┃ ┣ 📂46
+ ┃ ┃ ┃ ┗ 📜a878f4777e720d8c84677072d06ece043a087e
+ ┃ ┃ ┣ 📂47
+ ┃ ┃ ┃ ┗ 📜89daa6a443eefa7f3f729164a18351e06e9800
  ┃ ┃ ┣ 📂48
  ┃ ┃ ┃ ┣ 📜591e80fcfaa61a870fa6c6056b8e022f7a13af
  ┃ ┃ ┃ ┗ 📜6e612bb35d62b172fd993d5e54d9666346ce98
  ┃ ┃ ┣ 📂49
  ┃ ┃ ┃ ┣ 📜9feaac40db776405ac020701b29e0f3563d460
  ┃ ┃ ┃ ┗ 📜ca960ea37144a81f0a2b86b4493f6bd88dd94a
+ ┃ ┃ ┣ 📂4b
+ ┃ ┃ ┃ ┗ 📜81f9b2d200fc807eed25bca04dff9ee9dcc45f
  ┃ ┃ ┣ 📂4d
  ┃ ┃ ┃ ┣ 📜bfbf26bb4b5718410f0d935911afc86afafbe4
  ┃ ┃ ┃ ┗ 📜f9a329c735296df20fd67697befab7e824a987
@@ -114,28 +160,60 @@
  ┃ ┃ ┃ ┗ 📜c38e62ba1b2fb92159e867f7ecccc4d86ba2bb
  ┃ ┃ ┣ 📂53
  ┃ ┃ ┃ ┗ 📜8b0be3bc8348219806701e4d66018b4d320be5
+ ┃ ┃ ┣ 📂55
+ ┃ ┃ ┃ ┗ 📜290521ad20e9e7579f0b009f9738843d49da22
  ┃ ┃ ┣ 📂56
  ┃ ┃ ┃ ┗ 📜efd5e214145786f39741944082ed960964ccea
  ┃ ┃ ┣ 📂57
- ┃ ┃ ┃ ┗ 📜52987e2f0ef8b3327a248bca84c7cb105e95e8
+ ┃ ┃ ┃ ┣ 📜52987e2f0ef8b3327a248bca84c7cb105e95e8
+ ┃ ┃ ┃ ┗ 📜fc7c145ab3a2e11057f2166a5ca0e12e8e452a
  ┃ ┃ ┣ 📂59
  ┃ ┃ ┃ ┗ 📜a78b4e43468ce1260781dbd28f54c08969d8e9
+ ┃ ┃ ┣ 📂5a
+ ┃ ┃ ┃ ┗ 📜38aaefa07645061c546c1af31d9326989936d4
+ ┃ ┃ ┣ 📂5c
+ ┃ ┃ ┃ ┣ 📜aa9d1579e481a5894c37e2e56b0da062e95b35
+ ┃ ┃ ┃ ┗ 📜e6269cfa9b3817073eebfaeda36201d0e5fc97
  ┃ ┃ ┣ 📂5f
  ┃ ┃ ┃ ┣ 📜2f76d48ac665380e969a08f9dbd073c372686c
  ┃ ┃ ┃ ┗ 📜444a60dfcdf4938dd2839e84dfb866e8ad273b
+ ┃ ┃ ┣ 📂61
+ ┃ ┃ ┃ ┗ 📜f3bd1fc504c3b78271416d8cfd14faa1dae2b4
  ┃ ┃ ┣ 📂67
  ┃ ┃ ┃ ┗ 📜54edf1714fb29ad75a98bd01485ef9442a22af
+ ┃ ┃ ┣ 📂69
+ ┃ ┃ ┃ ┗ 📜d66ce656fea7be0aeae1519120a88b6fa2f829
+ ┃ ┃ ┣ 📂6c
+ ┃ ┃ ┃ ┗ 📜10964ab62a417fee0e5a0f0af7321893da80e9
+ ┃ ┃ ┣ 📂74
+ ┃ ┃ ┃ ┗ 📜6adbb6b9e14b7e685c91e280a4d37a672afbd8
  ┃ ┃ ┣ 📂79
  ┃ ┃ ┃ ┗ 📜75b030944d093beb6d0670718e971e4c427ff8
  ┃ ┃ ┣ 📂7a
  ┃ ┃ ┃ ┗ 📜6e6dd2f52f35ed95825ab6c43d501d66885b7a
  ┃ ┃ ┣ 📂7e
  ┃ ┃ ┃ ┗ 📜dc8c88d117f311b43b77e62fab38e14b39eed1
+ ┃ ┃ ┣ 📂80
+ ┃ ┃ ┃ ┗ 📜e867a4e06b4dc26d0a2b327cbd54041addc50a
+ ┃ ┃ ┣ 📂82
+ ┃ ┃ ┃ ┗ 📜b6f9d9a33e198f5747104729e1fcef999772a5
+ ┃ ┃ ┣ 📂84
+ ┃ ┃ ┃ ┗ 📜11198d2b574279cbee6683a881b7d19f6b5f2b
  ┃ ┃ ┣ 📂85
- ┃ ┃ ┃ ┗ 📜4c13e2558e680005f0f48a589b2f738598fb13
+ ┃ ┃ ┃ ┣ 📜2fa1a4728ae4789e3bca55dd07caef3b41f2a5
+ ┃ ┃ ┃ ┣ 📜4c13e2558e680005f0f48a589b2f738598fb13
+ ┃ ┃ ┃ ┗ 📜4f692b1c06a472670725529102847acef3c6c7
  ┃ ┃ ┣ 📂86
  ┃ ┃ ┃ ┣ 📜3e0fbffef9857e868aca95a0e88cdc392c426a
- ┃ ┃ ┃ ┗ 📜48c6a7ccef32e9717c4d8019c9383212f03270
+ ┃ ┃ ┃ ┣ 📜48c6a7ccef32e9717c4d8019c9383212f03270
+ ┃ ┃ ┃ ┣ 📜6cb273dcacfd649da794e0658e94128000800b
+ ┃ ┃ ┃ ┗ 📜ea2f7e01af1f825752a9710580b5bbf0710d2f
+ ┃ ┃ ┣ 📂88
+ ┃ ┃ ┃ ┗ 📜d1a74f46bc6e45cc194be2e678b0b43f8ba386
+ ┃ ┃ ┣ 📂89
+ ┃ ┃ ┃ ┗ 📜04827140bb7eaec58eb19c2a71b89b6ee893fc
+ ┃ ┃ ┣ 📂8a
+ ┃ ┃ ┃ ┗ 📜f96a2c8ade099adb3fca57791d512ff901fc4a
  ┃ ┃ ┣ 📂8b
  ┃ ┃ ┃ ┗ 📜aa0971f2371716c15261c65b9d737edd2f7cdb
  ┃ ┃ ┣ 📂93
@@ -144,53 +222,103 @@
  ┃ ┃ ┃ ┗ 📜6fe751de30f10ae83099be9f8213cadc58b745
  ┃ ┃ ┣ 📂95
  ┃ ┃ ┃ ┗ 📜e1c9e562fcd0f4f3f2ec840334dc64c4878dc8
+ ┃ ┃ ┣ 📂97
+ ┃ ┃ ┃ ┗ 📜7761ede091730f09b4a7901fcde64f5cff59ab
  ┃ ┃ ┣ 📂98
  ┃ ┃ ┃ ┗ 📜37bad12b715e19bc7a320e0c594d39f0cd9306
+ ┃ ┃ ┣ 📂9b
+ ┃ ┃ ┃ ┗ 📜0bcd4d5b97aad296994161a36c7fd275701317
  ┃ ┃ ┣ 📂9c
  ┃ ┃ ┃ ┗ 📜817eb2daead4eee3f3123445814bb479526d6d
  ┃ ┃ ┣ 📂a1
  ┃ ┃ ┃ ┗ 📜abbdcfbd1f57cd52c0e49ae67509cc2506b50c
+ ┃ ┃ ┣ 📂a2
+ ┃ ┃ ┃ ┗ 📜ec33f19f110ebff51a23342d7bc29ec9a1aaa6
+ ┃ ┃ ┣ 📂a3
+ ┃ ┃ ┃ ┗ 📜da9ea5b59dce3840c2d1d9c1abc235392b82db
  ┃ ┃ ┣ 📂a4
  ┃ ┃ ┃ ┗ 📜f007d3ae3a26b922d9104a21524920c47d997c
  ┃ ┃ ┣ 📂a5
+ ┃ ┃ ┃ ┣ 📜39d424aabdb07abead3dbc14d271595f9bc400
  ┃ ┃ ┃ ┗ 📜49d4866556ec8c0ec23ac7be078e10f07bd1ff
+ ┃ ┃ ┣ 📂ad
+ ┃ ┃ ┃ ┗ 📜bb730673889d7f101d7e13d8add3539b56e54b
  ┃ ┃ ┣ 📂ae
  ┃ ┃ ┃ ┗ 📜73cd3af7e34c03867d744ab9ffdeb27276676c
  ┃ ┃ ┣ 📂af
  ┃ ┃ ┃ ┗ 📜b034d2b95a7257be6943858a14f5b21d32dad2
+ ┃ ┃ ┣ 📂b3
+ ┃ ┃ ┃ ┗ 📜c176141221dbe2b40d3e36942b15068ba48677
  ┃ ┃ ┣ 📂b7
  ┃ ┃ ┃ ┗ 📜ca530a8253cdbd8c527a2c329e6b5b820f4e7e
+ ┃ ┃ ┣ 📂ba
+ ┃ ┃ ┃ ┗ 📜f3d77f76706dbc82162dd6bc9a1365ac5be830
+ ┃ ┃ ┣ 📂bd
+ ┃ ┃ ┃ ┗ 📜b57226d5f2bd20f11934f4903f16459cf52379
+ ┃ ┃ ┣ 📂bf
+ ┃ ┃ ┃ ┗ 📜8d421859d4c30d41c0f25d6441a14aed47f102
+ ┃ ┃ ┣ 📂c4
+ ┃ ┃ ┃ ┗ 📜3cc9b8ba4e4ae5c6df5ed5e3f199668b7fead0
  ┃ ┃ ┣ 📂c6
  ┃ ┃ ┃ ┗ 📜2b8d9350dc139a4c959e44d85a0b50a0acdadc
+ ┃ ┃ ┣ 📂c9
+ ┃ ┃ ┃ ┗ 📜efd72db33a43eacc24e937eed649e402bd9d50
  ┃ ┃ ┣ 📂cc
+ ┃ ┃ ┃ ┣ 📜434f7deeb43953979d3448b6ee26c6992770f9
  ┃ ┃ ┃ ┗ 📜6b0a8a1ab9a65145af8f3e198ab015f0be937c
+ ┃ ┃ ┣ 📂d0
+ ┃ ┃ ┃ ┗ 📜651fda5fbc1e0e728fe38d2abc65f7250c177d
  ┃ ┃ ┣ 📂d2
+ ┃ ┃ ┃ ┣ 📜4f91f7e05df98b8ebab4c16e8d9ab7acf24605
  ┃ ┃ ┃ ┗ 📜f41516d561307eecb0424efc66907d9ad2871f
  ┃ ┃ ┣ 📂d4
  ┃ ┃ ┃ ┗ 📜4ce0608964cd2f11c8071abe4fa833294085e3
+ ┃ ┃ ┣ 📂da
+ ┃ ┃ ┃ ┗ 📜bd7ce095be2f484af48794c03d746869130c32
+ ┃ ┃ ┣ 📂dd
+ ┃ ┃ ┃ ┗ 📜db8a30c851e7ef5b16a9108934bd1217b6b43f
+ ┃ ┃ ┣ 📂df
+ ┃ ┃ ┃ ┗ 📜f4f49561c816f70eaea557d889d31cf63447ac
  ┃ ┃ ┣ 📂e0
  ┃ ┃ ┃ ┗ 📜f4ba9e49ad39d5045d59b6e141d1587c6ef1e6
  ┃ ┃ ┣ 📂e2
  ┃ ┃ ┃ ┗ 📜287f76c50d6a11066ef7aff98c139164ef4b25
+ ┃ ┃ ┣ 📂e3
+ ┃ ┃ ┃ ┗ 📜3142e71bfc751ce1d7a7d46406235425786005
+ ┃ ┃ ┣ 📂e4
+ ┃ ┃ ┃ ┗ 📜bbe6a2f87ae81ccdbd59e3a1c8d28904f2492e
  ┃ ┃ ┣ 📂e5
  ┃ ┃ ┃ ┗ 📜3b692cc6bac9a5893606bfb281eefa0181d8c6
+ ┃ ┃ ┣ 📂e6
+ ┃ ┃ ┃ ┣ 📜3dcdab16f8d6711494416846bf9b86d0c186cd
+ ┃ ┃ ┃ ┗ 📜54aaafcd8288add0a8209e6a3b4ae4a59df8f1
  ┃ ┃ ┣ 📂e9
  ┃ ┃ ┃ ┗ 📜2e779b6167fb8b39eb66933b56000e0b30d042
  ┃ ┃ ┣ 📂ed
  ┃ ┃ ┃ ┗ 📜3996cc9c345467086c27bb9b5f66983e2371ba
+ ┃ ┃ ┣ 📂f0
+ ┃ ┃ ┃ ┗ 📜83318e09ca1b6b8484b1694a149f0c5d5cac1d
  ┃ ┃ ┣ 📂f4
- ┃ ┃ ┃ ┗ 📜e123bf75c4aba0765bac81546e539fade2828c
+ ┃ ┃ ┃ ┣ 📜e123bf75c4aba0765bac81546e539fade2828c
+ ┃ ┃ ┃ ┗ 📜f6dbdbfcfdc9ea12d45197049e9dabcf6850e3
  ┃ ┃ ┣ 📂f6
  ┃ ┃ ┃ ┗ 📜9b1abd9c89f0a0184397b149d91d9759f8931c
+ ┃ ┃ ┣ 📂f9
+ ┃ ┃ ┃ ┗ 📜78a1afeac816f63d5f29f73cf2b9954d3f7c83
  ┃ ┃ ┣ 📂fa
- ┃ ┃ ┃ ┗ 📜0feb28d9c17ae02923637b8b55e221726f3201
+ ┃ ┃ ┃ ┣ 📜0feb28d9c17ae02923637b8b55e221726f3201
+ ┃ ┃ ┃ ┗ 📜e1166f3a826beece64af8501df6b9f52a93189
+ ┃ ┃ ┣ 📂fd
+ ┃ ┃ ┃ ┗ 📜8b6f6971c6cef2806027dba3aa8b5d826c0fbf
  ┃ ┃ ┣ 📂ff
+ ┃ ┃ ┃ ┣ 📜5ddb3b8bdcd02db4e59cb12b3488f81ea0bb09
  ┃ ┃ ┃ ┗ 📜c6b94794ccc15f2daa4dcdbc292b503343c49e
  ┃ ┃ ┣ 📂info
  ┃ ┃ ┃ ┗ 📂commit-graphs
  ┃ ┃ ┃ ┃ ┣ 📜commit-graph-chain
  ┃ ┃ ┃ ┃ ┣ 📜graph-04f065b24e4e2beb1a8f5dbb3e8f7ec29c842c69.graph
- ┃ ┃ ┃ ┃ ┗ 📜graph-dd93bae4546a6d75783e9b3040a8f13539d66b71.graph
+ ┃ ┃ ┃ ┃ ┣ 📜graph-dd93bae4546a6d75783e9b3040a8f13539d66b71.graph
+ ┃ ┃ ┃ ┃ ┗ 📜graph-f3022de6d9307de1b6f4410b5232418e698785b7.graph
  ┃ ┃ ┗ 📂pack
  ┃ ┃ ┃ ┣ 📜pack-ed05dbeefb857cca99af11a06c9246ce4ae41611.idx
  ┃ ┃ ┃ ┣ 📜pack-ed05dbeefb857cca99af11a06c9246ce4ae41611.pack
@@ -198,13 +326,14 @@
  ┃ ┣ 📂refs
  ┃ ┃ ┣ 📂agents
  ┃ ┃ ┣ 📂heads
- ┃ ┃ ┃ ┗ 📜main
+ ┃ ┃ ┃ ┣ 📜main
+ ┃ ┃ ┃ ┗ 📜main_phase2
  ┃ ┃ ┣ 📂remotes
  ┃ ┃ ┃ ┗ 📂origin
  ┃ ┃ ┃ ┃ ┣ 📜HEAD
  ┃ ┃ ┃ ┃ ┗ 📜main
  ┃ ┃ ┗ 📂tags
- ┃ ┣ 📜AUTO_MERGE
+ ┃ ┣ 📜COMMIT_EDITMSG
  ┃ ┣ 📜FETCH_HEAD
  ┃ ┣ 📜HEAD
  ┃ ┣ 📜ORIG_HEAD
@@ -4626,27 +4755,6 @@
  ┃ ┃ ┗ 📂SourcePackages
  ┃ ┃ ┃ ┗ 📂firebase_messaging-16.6.0
  ┃ ┃ ┃ ┃ ┣ 📂android
- ┃ ┃ ┃ ┃ ┃ ┣ 📂.gradle
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂9.2.0
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂checksums
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜checksums.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂expanded
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂fileChanges
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜last-build.bin
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂fileHashes
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜fileHashes.bin
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜fileHashes.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂vcsMetadata
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜gc.properties
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂buildOutputCleanup
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜buildOutputCleanup.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜cache.properties
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂vcs-1
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜gc.properties
- ┃ ┃ ┃ ┃ ┃ ┣ 📂build
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂reports
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂problems
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜problems-report.html
  ┃ ┃ ┃ ┃ ┃ ┣ 📂src
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂main
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂java
@@ -5382,27 +5490,6 @@
  ┃ ┃ ┗ 📂SourcePackages
  ┃ ┃ ┃ ┗ 📂firebase_messaging-16.6.0
  ┃ ┃ ┃ ┃ ┣ 📂android
- ┃ ┃ ┃ ┃ ┃ ┣ 📂.gradle
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂9.2.0
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂checksums
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜checksums.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂expanded
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂fileChanges
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜last-build.bin
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂fileHashes
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜fileHashes.bin
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜fileHashes.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂vcsMetadata
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜gc.properties
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂buildOutputCleanup
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜buildOutputCleanup.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜cache.properties
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂vcs-1
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜gc.properties
- ┃ ┃ ┃ ┃ ┃ ┣ 📂build
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂reports
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂problems
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜problems-report.html
  ┃ ┃ ┃ ┃ ┃ ┣ 📂src
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂main
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂java
@@ -5433,18 +5520,6 @@
  ┃ ┃ ┃ ┃ ┃ ┗ 📜user-agent.gradle
  ┃ ┃ ┃ ┃ ┣ 📂example
  ┃ ┃ ┃ ┃ ┃ ┣ 📂android
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂.gradle
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂8.4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂checksums
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜checksums.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂fileChanges
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜last-build.bin
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂fileHashes
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜fileHashes.lock
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂vcsMetadata
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜gc.properties
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂vcs-1
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜gc.properties
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂app
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂src
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂debug
@@ -6384,6 +6459,32 @@
  ┃ ┣ 📂base
  ┃ ┃ ┗ 📂responses
  ┃ ┃ ┃ ┗ 📜base_response.dart
+ ┃ ┣ 📂calculator_core
+ ┃ ┃ ┣ 📂calculators
+ ┃ ┃ ┃ ┣ 📜brick_calculator.dart
+ ┃ ┃ ┃ ┣ 📜cement_calculator.dart
+ ┃ ┃ ┃ ┣ 📜custom_material_calculator.dart
+ ┃ ┃ ┃ ┣ 📜door_calculator.dart
+ ┃ ┃ ┃ ┣ 📜paint_calculator.dart
+ ┃ ┃ ┃ ┣ 📜sand_calculator.dart
+ ┃ ┃ ┃ ┣ 📜steel_calculator.dart
+ ┃ ┃ ┃ ┣ 📜stone_calculator.dart
+ ┃ ┃ ┃ ┗ 📜tile_calculator.dart
+ ┃ ┃ ┣ 📂constants
+ ┃ ┃ ┃ ┗ 📜construction_constants.dart
+ ┃ ┃ ┣ 📂models
+ ┃ ┃ ┃ ┣ 📂project
+ ┃ ┃ ┃ ┃ ┗ 📜foundation_structure_model.dart
+ ┃ ┃ ┃ ┣ 📜brick.dart
+ ┃ ┃ ┃ ┗ 📜material_model.dart
+ ┃ ┃ ┣ 📂services
+ ┃ ┃ ┃ ┣ 📜foundation_structure_calculator.dart
+ ┃ ┃ ┃ ┗ 📜material_calculator.dart
+ ┃ ┃ ┣ 📂utils
+ ┃ ┃ ┃ ┣ 📜calculation_utils.dart
+ ┃ ┃ ┃ ┣ 📜number_formatter.dart
+ ┃ ┃ ┃ ┗ 📜wall_calculator.dart
+ ┃ ┃ ┗ 📜.DS_Store
  ┃ ┣ 📂common
  ┃ ┃ ┣ 📂helpers
  ┃ ┃ ┃ ┗ 📜is_dark_mode.dart
@@ -6538,6 +6639,7 @@
  ┃ ┃ ┗ 📜navigation_service.dart
  ┃ ┣ 📂utils
  ┃ ┃ ┗ 📜in_memory_storage.dart
+ ┃ ┣ 📜.DS_Store
  ┃ ┣ 📜bootstrap.dart
  ┃ ┣ 📜injection_container.dart
  ┃ ┣ 📜main.dart
@@ -7480,6 +7582,7 @@
  ┣ 📜.gitignore
  ┣ 📜.metadata
  ┣ 📜CLEANUP_GUIDE.md
+ ┣ 📜PHASE2_AI_AGENT_EXECUTION_PLAN.md
  ┣ 📜README.md
  ┣ 📜SCAN_CODEBASE.md
  ┣ 📜analysis_options.yaml

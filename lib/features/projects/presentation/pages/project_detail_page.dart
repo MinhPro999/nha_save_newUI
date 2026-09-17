@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core_project/core/configs/theme/app_colors.dart';
 import 'package:flutter_core_project/features/projects/domain/entities/construction_project.dart';
-import 'package:flutter_core_project/features/projects/domain/services/project_cost_estimator.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/project_calculation_result.dart';
 import 'package:flutter_core_project/features/projects/presentation/bloc/project_cubit.dart';
 import 'package:flutter_core_project/features/projects/presentation/bloc/project_state.dart';
 import 'package:flutter_core_project/features/projects/presentation/pages/project_wizard_page.dart';
@@ -54,42 +54,112 @@ class ProjectDetailPage extends StatelessWidget {
           );
         }
 
+        // Chỉ dùng kết quả calculation của CHÍNH project này (tránh stale).
+        final calculationResult = state.calculationProjectId == project.id
+            ? state.calculationResult
+            : null;
+
         return _ProjectDetailView(
           key: const Key('projectDetailPage'),
           project: project,
           isSaving: state.status == ProjectStatus.saving,
           allowEditing: allowEditing,
+          calculationStatus: calculationResult == null &&
+                  state.calculationProjectId == project.id
+              ? state.calculationStatus
+              : ProjectCalculationStatus.idle,
+          calculationResult: calculationResult,
+          calculationError: state.calculationProjectId == project.id
+              ? state.calculationError
+              : null,
         );
       },
     );
   }
 }
 
-class _ProjectDetailView extends StatelessWidget {
+class _ProjectDetailView extends StatefulWidget {
   const _ProjectDetailView({
     super.key,
     required this.project,
     required this.isSaving,
     required this.allowEditing,
+    required this.calculationStatus,
+    required this.calculationResult,
+    required this.calculationError,
   });
-
-  static const _estimator = ProjectCostEstimator();
 
   final ConstructionProject project;
   final bool isSaving;
   final bool allowEditing;
+  final ProjectCalculationStatus calculationStatus;
+  final ProjectCalculationResult? calculationResult;
+  final String? calculationError;
+
+  @override
+  State<_ProjectDetailView> createState() => _ProjectDetailViewState();
+}
+
+class _ProjectDetailViewState extends State<_ProjectDetailView> {
+  bool _calculateTriggered = false;
+
+  ConstructionProject get project => widget.project;
+  bool get isSaving => widget.isSaving;
+  bool get allowEditing => widget.allowEditing;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || _calculateTriggered) return;
+      _calculateTriggered = true;
+      _triggerCalculation();
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant _ProjectDetailView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Project được làm mới (vd sau khi edit/save) → tính lại để không stale.
+    if (oldWidget.project != widget.project) {
+      _calculateTriggered = false;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || _calculateTriggered) return;
+        _calculateTriggered = true;
+        _triggerCalculation();
+      });
+    }
+  }
+
+  void _triggerCalculation() {
+    context.read<ProjectCubit>().calculate(widget.project);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final estimate = _estimator.estimate(project);
+    final calculationResult = widget.calculationResult;
+    final lines =
+        calculationResult?.materialLines ?? const <ProjectMaterialLine>[];
+    final totalCost = calculationResult?.totalCost ?? 0.0;
+    final isCalculating =
+        widget.calculationStatus == ProjectCalculationStatus.calculating;
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
           _buildAppBar(context),
-          if (isSaving)
+          if (isSaving || isCalculating)
             const SliverToBoxAdapter(
               child: LinearProgressIndicator(minHeight: 2),
+            ),
+          if (widget.calculationStatus == ProjectCalculationStatus.failure)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(18, 12, 18, 0),
+                child: _CalculationErrorBanner(
+                  error: widget.calculationError ?? '?',
+                ),
+              ),
             ),
           SliverToBoxAdapter(
             child: Center(
@@ -107,7 +177,10 @@ class _ProjectDetailView extends StatelessWidget {
                     children: [
                       _UpdatedLabel(project: project),
                       const SizedBox(height: 18),
-                      _ProjectMetrics(project: project, estimate: estimate),
+                      _ProjectMetrics(
+                        project: project,
+                        totalCost: totalCost,
+                      ),
                       const SizedBox(height: 30),
                       _TechnicalOverview(project: project),
                       const SizedBox(height: 30),
@@ -117,9 +190,9 @@ class _ProjectDetailView extends StatelessWidget {
                       const SizedBox(height: 30),
                       _DetailedParameters(project: project),
                       const SizedBox(height: 30),
-                      _CostDistribution(estimate: estimate),
+                      _CostDistribution(lines: lines, total: totalCost),
                       const SizedBox(height: 30),
-                      _MaterialList(estimate: estimate),
+                      _MaterialList(lines: lines, total: totalCost),
                     ],
                   ),
                 ),
@@ -281,6 +354,8 @@ class _ProjectDetailView extends StatelessWidget {
   void _handleAction(BuildContext context, _ProjectAction action) {
     switch (action) {
       case _ProjectAction.calculate:
+        // Tính lại bằng calculation thật (CalculationService → Legacy).
+        context.read<ProjectCubit>().calculate(project);
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(
@@ -454,10 +529,10 @@ class _UpdatedLabel extends StatelessWidget {
 }
 
 class _ProjectMetrics extends StatelessWidget {
-  const _ProjectMetrics({required this.project, required this.estimate});
+  const _ProjectMetrics({required this.project, required this.totalCost});
 
   final ConstructionProject project;
-  final ProjectCostEstimate estimate;
+  final double totalCost;
 
   @override
   Widget build(BuildContext context) {
@@ -484,7 +559,7 @@ class _ProjectMetrics extends StatelessWidget {
       _MetricData(
         icon: Icons.payments_outlined,
         label: context.tr('project_estimated_cost'),
-        value: _formatCompactCurrency(estimate.totalCost),
+        value: _formatCompactCurrency(totalCost),
         color: const Color(0xFF249A68),
       ),
     ];
@@ -938,9 +1013,10 @@ class _EmptyPanel extends StatelessWidget {
 }
 
 class _CostDistribution extends StatelessWidget {
-  const _CostDistribution({required this.estimate});
+  const _CostDistribution({required this.lines, required this.total});
 
-  final ProjectCostEstimate estimate;
+  final List<ProjectMaterialLine> lines;
+  final double total;
 
   @override
   Widget build(BuildContext context) {
@@ -953,8 +1029,9 @@ class _CostDistribution extends StatelessWidget {
       const Color(0xFF7A62C9),
       const Color(0xFF249A68),
     ];
-    final priced =
-        estimate.linesByCost.where((line) => line.amount > 0).toList();
+    // Chỉ sắp xếp trình bày — KHÔNG tính lại cost.
+    final priced = [...lines.where((line) => line.cost > 0)]
+      ..sort((a, b) => b.cost.compareTo(a.cost));
     return _DetailSection(
       title: context.tr('project_cost_distribution'),
       icon: Icons.donut_large_outlined,
@@ -982,7 +1059,7 @@ class _CostDistribution extends StatelessWidget {
                             dimension: chartSize,
                             child: _CostDonut(
                               lines: priced,
-                              total: estimate.totalCost,
+                              total: total,
                               colors: colors,
                             ),
                           ),
@@ -997,7 +1074,7 @@ class _CostDistribution extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
-                                  _formatCurrency(estimate.totalCost),
+                                  _formatCurrency(total),
                                   key: const Key('projectTotalEstimate'),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
@@ -1032,7 +1109,7 @@ class _CostDistribution extends StatelessWidget {
                   for (var index = 0; index < priced.length; index++) ...[
                     _CostLegendRow(
                       line: priced[index],
-                      total: estimate.totalCost,
+                      total: total,
                       color: colors[index % colors.length],
                     ),
                     if (index < priced.length - 1) const SizedBox(height: 12),
@@ -1058,7 +1135,7 @@ class _CostDonut extends StatelessWidget {
     required this.colors,
   });
 
-  final List<ProjectCostLine> lines;
+  final List<ProjectMaterialLine> lines;
   final double total;
   final List<Color> colors;
 
@@ -1070,7 +1147,7 @@ class _CostDonut extends StatelessWidget {
       children: [
         CustomPaint(
           painter: _CostDonutPainter(
-            values: [for (final line in lines) line.amount],
+            values: [for (final line in lines) line.cost],
             total: total,
             colors: colors,
             trackColor: Theme.of(context).dividerColor.withValues(alpha: 0.55),
@@ -1163,13 +1240,13 @@ class _CostLegendRow extends StatelessWidget {
     required this.color,
   });
 
-  final ProjectCostLine line;
+  final ProjectMaterialLine line;
   final double total;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
-    final ratio = total <= 0 ? 0.0 : (line.amount / total).clamp(0.0, 1.0);
+    final ratio = total <= 0 ? 0.0 : (line.cost / total).clamp(0.0, 1.0);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -1187,7 +1264,7 @@ class _CostLegendRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                line.material.name,
+                line.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -1196,7 +1273,7 @@ class _CostLegendRow extends StatelessWidget {
               ),
               const SizedBox(height: 3),
               Text(
-                _formatCurrency(line.amount),
+                _formatCurrency(line.cost),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall,
@@ -1227,9 +1304,10 @@ class _CostLegendRow extends StatelessWidget {
 }
 
 class _MaterialList extends StatelessWidget {
-  const _MaterialList({required this.estimate});
+  const _MaterialList({required this.lines, required this.total});
 
-  final ProjectCostEstimate estimate;
+  final List<ProjectMaterialLine> lines;
+  final double total;
 
   @override
   Widget build(BuildContext context) {
@@ -1237,7 +1315,7 @@ class _MaterialList extends StatelessWidget {
     return _DetailSection(
       title: context.tr('project_material_labor_list'),
       icon: Icons.inventory_2_outlined,
-      child: estimate.lines.isEmpty
+      child: lines.isEmpty
           ? _EmptyPanel(text: context.tr('project_no_materials'))
           : Container(
               decoration: BoxDecoration(
@@ -1248,11 +1326,9 @@ class _MaterialList extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  for (var index = 0;
-                      index < estimate.lines.length;
-                      index++) ...[
-                    _MaterialRow(line: estimate.lines[index]),
-                    if (index != estimate.lines.length - 1)
+                  for (var index = 0; index < lines.length; index++) ...[
+                    _MaterialRow(line: lines[index]),
+                    if (index != lines.length - 1)
                       Divider(
                         height: 1,
                         indent: 58,
@@ -1283,7 +1359,7 @@ class _MaterialList extends StatelessWidget {
                         ),
                         Flexible(
                           child: Text(
-                            _formatCurrency(estimate.totalCost),
+                            _formatCurrency(total),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.right,
@@ -1309,16 +1385,14 @@ class _MaterialList extends StatelessWidget {
 class _MaterialRow extends StatelessWidget {
   const _MaterialRow({required this.line});
 
-  final ProjectCostLine line;
+  final ProjectMaterialLine line;
 
   @override
   Widget build(BuildContext context) {
-    final unit = _localizedUnit(context, line.material.unit);
-    final hasPrice = line.material.unitPrice > 0;
+    final unit = _localizedUnit(context, line.unit ?? '');
+    final hasPrice = line.unitPrice > 0;
     final accent = AppColors.linearShapeFor(context);
-    final materialColor = line.material.type == ProjectMaterialType.material
-        ? accent
-        : const Color(0xFFE58A19);
+    final materialColor = hasPrice ? accent : const Color(0xFFE58A19);
     return Padding(
       padding: const EdgeInsets.all(14),
       child: Row(
@@ -1332,9 +1406,7 @@ class _MaterialRow extends StatelessWidget {
               borderRadius: BorderRadius.circular(7),
             ),
             child: Icon(
-              line.material.type == ProjectMaterialType.material
-                  ? Icons.inventory_2_outlined
-                  : Icons.engineering_outlined,
+              Icons.inventory_2_outlined,
               size: 19,
               color: materialColor,
             ),
@@ -1345,7 +1417,7 @@ class _MaterialRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  line.material.name,
+                  line.name,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -1354,7 +1426,7 @@ class _MaterialRow extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${_formatDecimal(line.quantity)} $unit  •  ${hasPrice ? '${_formatCurrency(line.material.unitPrice)} / $unit' : context.tr('project_price_not_set')}',
+                  '${_formatDecimal(line.quantity)} $unit  •  ${hasPrice ? '${_formatCurrency(line.unitPrice)} / $unit' : context.tr('project_price_not_set')}',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
@@ -1364,7 +1436,7 @@ class _MaterialRow extends StatelessWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 132),
             child: Text(
-              hasPrice ? _formatCurrency(line.amount) : '—',
+              hasPrice ? _formatCurrency(line.cost) : '—',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.right,
@@ -1372,6 +1444,41 @@ class _MaterialRow extends StatelessWidget {
                     color: hasPrice ? null : Theme.of(context).disabledColor,
                     fontWeight: FontWeight.w700,
                   ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CalculationErrorBanner extends StatelessWidget {
+  const _CalculationErrorBanner({required this.error});
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE55C4A).withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: const Color(0xFFE55C4A).withValues(alpha: 0.35),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.error_outline_rounded, color: Color(0xFFE55C4A)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              error,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ],

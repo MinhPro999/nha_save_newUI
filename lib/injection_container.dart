@@ -19,6 +19,10 @@ import 'package:flutter_core_project/features/projects/data/project_repository_i
 import 'package:flutter_core_project/features/projects/data/project_store.dart';
 import 'package:flutter_core_project/features/projects/data/project_store_factory.dart';
 import 'package:flutter_core_project/features/projects/domain/repositories/project_repository.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/calculation_service.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/legacy_calculation_service.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/mock_calculation_service.dart';
+import 'package:flutter_core_project/features/projects/domain/usecases/calculate_project.dart';
 import 'package:flutter_core_project/features/projects/domain/usecases/get_projects.dart';
 import 'package:flutter_core_project/features/projects/domain/usecases/save_project.dart';
 import 'package:flutter_core_project/features/projects/presentation/bloc/project_cubit.dart';
@@ -78,6 +82,20 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton(() => GetProjects(sl()));
   sl.registerLazySingleton(() => SaveProject(sl()));
   sl.registerFactory(
-    () => ProjectCubit(getProjects: sl(), saveProject: sl()),
+    () => ProjectCubit(
+      getProjects: sl(),
+      saveProject: sl(),
+      calculateProject: sl(),
+    ),
   );
+
+  // ── Calculation (Phase 2 — Gate 7) ────────────────────────────────────
+  // Gate 6 regression PASS → production binding chuyển sang real engine.
+  // MockCalculationService GIỮ LẠI cho dev/test (không xóa), nhưng KHÔNG còn
+  // là production binding.
+  sl.registerLazySingleton<CalculationService>(
+    () => const LegacyCalculationService(),
+  );
+  sl.registerLazySingleton(() => const MockCalculationService());
+  sl.registerLazySingleton(() => CalculateProject(sl()));
 }

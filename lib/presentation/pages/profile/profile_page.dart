@@ -146,19 +146,22 @@ class _PreferencesCard extends StatelessWidget {
             child: BlocBuilder<ThemeCubit, ThemeMode>(
               builder: (context, mode) {
                 final isDark = mode == ThemeMode.dark;
-                return SwitchListTile.adaptive(
-                  key: const Key('themeSwitch'),
-                  value: isDark,
-                  onChanged: (_) => context.read<ThemeCubit>().toggleTheme(),
-                  activeThumbColor: AppColors.linearShapeFor(context),
-                  secondary: _SettingIcon(
-                    icon: isDark
-                        ? Icons.dark_mode_rounded
-                        : Icons.light_mode_rounded,
-                  ),
-                  title: Text(context.tr('theme')),
-                  subtitle: Text(
-                    context.tr(isDark ? 'dark_mode' : 'light_mode'),
+                return Material(
+                  type: MaterialType.transparency,
+                  child: SwitchListTile.adaptive(
+                    key: const Key('themeSwitch'),
+                    value: isDark,
+                    onChanged: (_) => context.read<ThemeCubit>().toggleTheme(),
+                    activeThumbColor: AppColors.linearShapeFor(context),
+                    secondary: _SettingIcon(
+                      icon: isDark
+                          ? Icons.dark_mode_rounded
+                          : Icons.light_mode_rounded,
+                    ),
+                    title: Text(context.tr('theme')),
+                    subtitle: Text(
+                      context.tr(isDark ? 'dark_mode' : 'light_mode'),
+                    ),
                   ),
                 );
               },
@@ -169,16 +172,19 @@ class _PreferencesCard extends StatelessWidget {
             child: BlocBuilder<LocaleCubit, Locale>(
               builder: (context, locale) {
                 final isVietnamese = locale.languageCode == 'vi';
-                return SwitchListTile.adaptive(
-                  key: const Key('languageSwitch'),
-                  value: isVietnamese,
-                  onChanged: (_) =>
-                      context.read<LocaleCubit>().toggleLanguage(),
-                  activeThumbColor: AppColors.linearShapeFor(context),
-                  secondary: const _SettingIcon(icon: Icons.language_rounded),
-                  title: Text(context.tr('language')),
-                  subtitle: Text(
-                    context.tr(isVietnamese ? 'vietnamese' : 'english'),
+                return Material(
+                  type: MaterialType.transparency,
+                  child: SwitchListTile.adaptive(
+                    key: const Key('languageSwitch'),
+                    value: isVietnamese,
+                    onChanged: (_) =>
+                        context.read<LocaleCubit>().toggleLanguage(),
+                    activeThumbColor: AppColors.linearShapeFor(context),
+                    secondary: const _SettingIcon(icon: Icons.language_rounded),
+                    title: Text(context.tr('language')),
+                    subtitle: Text(
+                      context.tr(isVietnamese ? 'vietnamese' : 'english'),
+                    ),
                   ),
                 );
               },

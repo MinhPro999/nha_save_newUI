@@ -1,0 +1,34 @@
+{
+  "sourceSha": "e5fc8943daaab5953c75bd161061cd83a934b5fd",
+  "generatedAt": "2026-09-16T16:42:17.544800Z",
+  "caseId": "golden_foundation_coc_d22",
+  "material": {
+    "quantities": {},
+    "costs": {},
+    "intermediateResults": {}
+  },
+  "foundation": {
+    "columnConcreteM3": 0.6749999999999999,
+    "foundationConcreteM3": 4.0920000000000005,
+    "totalConcreteM3": 4.767,
+    "columnCementKg": 290.24999999999994,
+    "columnSandM3": 0.30374999999999996,
+    "columnStoneM3": 0.5804999999999999,
+    "columnWaterL": 124.87499999999999,
+    "foundationCementKg": 1759.5600000000002,
+    "foundationSandM3": 1.8414000000000004,
+    "foundationStoneM3": 3.5191200000000005,
+    "foundationWaterL": 757.0200000000001,
+    "totalCementKg": 2049.81,
+    "totalSandM3": 2.14515,
+    "totalStoneM3": 4.099620000000001,
+    "totalWaterL": 881.8950000000001,
+    "columnSteelKg": 214.02359999999996,
+    "foundationSteelKg": 215.2752,
+    "totalSteelKg": 429.29879999999997,
+    "cementBags50kg": 41,
+    "cementTon": 2.04981,
+    "steelTon": 0.4292988,
+    "waterM3": 0.8818950000000001
+  }
+}
