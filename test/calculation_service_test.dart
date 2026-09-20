@@ -164,8 +164,8 @@ void main() {
     test('gọi CalculationService và trả đúng ProjectCalculationResult',
         () async {
       const expected = ProjectCalculationResult();
-      final useCase = CalculateProject(
-        const _FakeCalculationService(expected),
+      const useCase = CalculateProject(
+        _FakeCalculationService(expected),
       );
       final result = await useCase(buildSampleProject());
       expect(identical(result, expected), true);
@@ -176,8 +176,8 @@ void main() {
     test(
         'ConstructionProject → CalculateProject → LegacyCalculationService '
         '→ typed result (non-zero, foundation, cost)', () async {
-      final useCase = CalculateProject(
-        const LegacyCalculationService(),
+      const useCase = CalculateProject(
+        LegacyCalculationService(),
       );
       final result = await useCase(buildSampleProject());
 

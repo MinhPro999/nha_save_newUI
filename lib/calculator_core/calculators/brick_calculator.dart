@@ -103,7 +103,7 @@ class BrickCalculator {
     final double brickM2 = _calculateBrickM2(walls);
 
     // Ensemble: 25% M1 + 75% M2
-    final double alpha = ConstructionConstants.hybridEnsembleAlpha;
+    const double alpha = ConstructionConstants.hybridEnsembleAlpha;
     return alpha * brickM1 + (1.0 - alpha) * brickM2;
   }
 
@@ -134,7 +134,7 @@ class BrickCalculator {
             area20 * ConstructionConstants.hybridBricksPerM2_20cm;
 
     // Áp dụng hao hụt và khấu trừ cửa
-    final double wasteMultiplier = 1.0 + ConstructionConstants.hybridBrickWaste;
+    const double wasteMultiplier = 1.0 + ConstructionConstants.hybridBrickWaste;
     final double openingMultiplier = CalculationUtils.clamp01(
         1.0 - ConstructionConstants.hybridOpeningsDeduction);
 

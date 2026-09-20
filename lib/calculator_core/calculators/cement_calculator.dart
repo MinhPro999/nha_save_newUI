@@ -105,7 +105,7 @@ class CementCalculator {
     final double cementM2 = _calculateCementM2(walls);
 
     // Ensemble: 25% M1 + 75% M2
-    final double alpha = ConstructionConstants.hybridEnsembleAlpha;
+    const double alpha = ConstructionConstants.hybridEnsembleAlpha;
     return alpha * cementM1 + (1.0 - alpha) * cementM2;
   }
 
@@ -196,8 +196,8 @@ class CementCalculator {
     CalculationUtils.validateArea(wallArea);
 
     // Mặc định trát 2 mặt và tường 10cm nếu không có thông tin chi tiết
-    final int defaultPlasterSides = 2;
-    final double defaultWallThickness = 0.1; // 10cm
+    const int defaultPlasterSides = 2;
+    const double defaultWallThickness = 0.1; // 10cm
 
     // Tính xi măng cho vữa xây theo công thức mới
     final double buildingCement = _calculateCementForBuildingMortar(

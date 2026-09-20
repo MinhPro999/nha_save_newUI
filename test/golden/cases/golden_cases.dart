@@ -55,7 +55,7 @@ List<GoldenCase> buildGoldenCases() {
     );
   }
   {
-    final id = 'golden_walls_mixed_100_200';
+    const id = 'golden_walls_mixed_100_200';
     final walls = [
       wallMap('10', 2, wall100L, wall100H),
       wallMap('20', 1, wall200L, wall200H),

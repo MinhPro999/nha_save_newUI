@@ -212,7 +212,7 @@ class TileCalculator {
     CalculationUtils.validateNonNegative(groutDensity, 'Khối lượng riêng vữa');
 
     // Ước tính tỷ lệ mạch chà ron (khoảng 5% diện tích)
-    final double jointRatio = 0.05;
+    const double jointRatio = 0.05;
 
     // Chuyển độ sâu từ mm sang m
     final double depthM = jointDepth / 1000.0;

@@ -8,7 +8,6 @@ import 'package:flutter_core_project/features/projects/domain/services/calculati
 import 'package:flutter_core_project/features/projects/domain/usecases/calculate_project.dart';
 import 'package:flutter_core_project/injection_container.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:path/path.dart' as path_util;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -471,8 +470,8 @@ void main() {
     final modified = project.copyWith(
       details: ProjectDetails(
         foundationSegments: project.details.foundationSegments,
-        walls: [
-          const WallSpec(
+        walls: const [
+          WallSpec(
             type: WallType.wall100,
             plasterSides: 2,
             length: 10,

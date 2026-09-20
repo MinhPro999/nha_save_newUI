@@ -106,7 +106,7 @@ class ConstructionPlanApp extends StatelessWidget {
     // KHÔNG dùng Mock — Mock chỉ cho test isolation.
     final calculateProject = sl.isRegistered<CalculateProject>()
         ? sl<CalculateProject>()
-        : CalculateProject(const LegacyCalculationService());
+        : const CalculateProject(LegacyCalculationService());
     return ProjectCubit(
       getProjects: GetProjects(repository),
       saveProject: SaveProject(repository),

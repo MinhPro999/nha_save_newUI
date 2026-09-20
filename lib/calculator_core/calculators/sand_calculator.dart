@@ -106,7 +106,7 @@ class SandCalculator {
     final double sandM2 = _calculateSandM2(walls);
 
     // Ensemble: 25% M1 + 75% M2
-    final double alpha = ConstructionConstants.hybridEnsembleAlpha;
+    const double alpha = ConstructionConstants.hybridEnsembleAlpha;
     return alpha * sandM1 + (1.0 - alpha) * sandM2;
   }
 
