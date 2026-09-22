@@ -673,4 +673,49 @@ void main() {
       OpeningType.rollingDoor,
     );
   });
+
+  test(
+      'FIX-CALC-001 — interior_paint + bỏ qua Tường → Default Wall đúng '
+      'số liệu, save/reload KHÔNG ghi dữ liệu ước lượng ngược vào DB',
+      () async {
+    final project = buildProject(
+      id: 'e2e-default-wall',
+      floors: const [
+        BuildingFloor(number: 1, length: 10, width: 8, height: 3.3),
+      ],
+      materials: const [
+        ProjectMaterial(
+          selectionKey: 'sel-paint',
+          catalogCode: 'interior_paint',
+          name: 'Sơn nội thất',
+          unit: 'm2',
+          unitPrice: 65000,
+          type: ProjectMaterialType.material,
+        ),
+      ],
+      details: const ProjectDetails(
+        foundationSegments: [FoundationSegment(12), FoundationSegment(8)],
+        // KHÔNG nhập tường.
+      ),
+    );
+
+    final before = await calculateProject(project);
+
+    // Không throw, không issue — status success.
+    expect(before.issues, isEmpty);
+    expect(before.status, 'success');
+    final paint =
+        before.materialLines.firstWhere((line) => line.name == 'Sơn nội thất');
+    // Default Wall: perimeter = 36 → 36 × 3.3 × 2 × 1.5 = 356.4 m².
+    expect(paint.quantity, closeTo(356.4, 1e-9));
+    expect(paint.cost, closeTo(65000 * 356.4, 1e-9));
+
+    await saveProject(project);
+    final reloaded = await reloadProjects();
+    // Dữ liệu Default Wall KHÔNG ghi ngược DB — walls vẫn rỗng.
+    expect(reloaded.single.details.walls, isEmpty);
+
+    final after = await calculateProject(reloaded.single);
+    expectResultParity(after, before);
+  });
 }

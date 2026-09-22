@@ -1,6 +1,8 @@
 import 'package:flutter_core_project/calculator_core/models/project/foundation_structure_model.dart';
 import 'package:flutter_core_project/features/projects/domain/entities/construction_project.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/default_wall_calculator.dart';
 import 'package:flutter_core_project/features/projects/domain/services/calculation/legacy_material_selection_key_mapper.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/wall_dependency_helper.dart';
 
 /// Đầu vào đã map cho `MaterialCalculator.calculateMaterialsFromDetailedParams`.
 class LegacyMaterialInput {
@@ -62,15 +64,36 @@ class LegacyInputMapper {
   }) {
     final details = project.details;
 
-    final walls = details.walls.map((wall) {
-      return <String, dynamic>{
-        'type': mapWallType(wall.type),
-        'plasterSides': wall.plasterSides,
-        'length': wall.length,
-        'height': wall.height,
-        'area': wall.area,
-      };
-    }).toList();
+    // ── Walls: ưu tiên WallSpec thật, fallback Default Wall ──────────
+    // FIX-CALC-001 Phase 2:
+    // - Có >= 1 item hợp lệ (length>0 && height>0) → dùng ĐÚNG VÀ CHỈ các
+    //   item hợp lệ đó, KHÔNG cộng thêm Default Wall (tránh double-count).
+    // - Không có item hợp lệ nào VÀ có vật liệu phụ thuộc tường được chọn
+    //   → Default Wall Calculator (Phase 1).
+    //   Điều kiện "có vật liệu phụ thuộc tường" giữ nguyên canonical input
+    //   của golden cases (foundation-only có selectedMaterialIds rỗng →
+    //   walls vẫn là list rỗng như legacy) — kết quả golden KHÔNG đổi.
+    final explicitWalls = details.walls
+        .where((wall) => wall.length > 0 && wall.height > 0)
+        .toList();
+
+    final walls = explicitWalls.isNotEmpty
+        ? explicitWalls
+            .map((wall) => <String, dynamic>{
+                  'type': mapWallType(wall.type),
+                  'plasterSides': wall.plasterSides,
+                  'length': wall.length,
+                  'height': wall.height,
+                  'area': wall.area,
+                  // Lưu ý: KHÔNG thêm key mới vào entry explicit — golden
+                  // test deep-compare detailedParams theo shape legacy.
+                })
+            .toList()
+        : WallDependencyHelper.hasWallDependentMaterial(project)
+            ? DefaultWallCalculator.buildDefaultWallEntries(
+                floors: project.floors,
+              )
+            : <Map<String, dynamic>>[];
     final totalWallArea =
         walls.fold<double>(0, (sum, wall) => sum + (wall['area'] as double));
 

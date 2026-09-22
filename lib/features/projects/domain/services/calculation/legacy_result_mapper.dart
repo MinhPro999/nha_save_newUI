@@ -16,6 +16,38 @@ import 'package:flutter_core_project/features/projects/domain/services/calculati
 class LegacyResultMapper {
   LegacyResultMapper._();
 
+  /// Bảng map message lỗi legacy → code ổn định (UI tra l10n theo code).
+  /// FIX-CALC-001 Phase 5 — không nhét message tiếng Việt cứng vào UI.
+  static const _knownErrorCodes = {
+    'Diện tích sơn nội thất phải lớn hơn 0': 'walls_calculation_failed',
+    'Thiếu thông số cần thiết: walls hoặc wallArea': 'walls_calculation_failed',
+  };
+
+  /// Map `legacyResults['errors']` (Map section → Exception, Phase 5) thành
+  /// `List<CalculationIssue>` có cấu trúc.
+  static List<CalculationIssue> _mapIssues(Map<String, dynamic> legacyResults) {
+    final raw = legacyResults['errors'];
+    if (raw is! Map) return const [];
+    final issues = <CalculationIssue>[];
+    raw.forEach((section, error) {
+      final message = error.toString();
+      final code = _knownErrorCodes.entries
+          .firstWhere(
+            (entry) => message.contains(entry.key),
+            orElse: () => const MapEntry('', 'unknown_calculation_error'),
+          )
+          .value;
+      issues.add(
+        CalculationIssue(
+          section: section.toString(),
+          code: code,
+          severity: CalculationIssueSeverity.error,
+        ),
+      );
+    });
+    return issues;
+  }
+
   /// Kết quả từ `MaterialCalculator.calculateMaterialsFromDetailedParams`
   /// + price snapshot của project → [ProjectCalculationResult].
   static ProjectCalculationResult mapMaterialResult(
@@ -30,6 +62,10 @@ class LegacyResultMapper {
             ))
         : <String, double>{};
 
+    // FIX-CALC-001 Phase 5: lỗi theo nhóm (walls/foundation/doors/others)
+    // → structured issues, KHÔNG để exception text lọt tới UI.
+    final issues = _mapIssues(legacyResults);
+
     final lines = <ProjectMaterialLine>[];
     for (final material in materials) {
       final key = LegacyMaterialSelectionKeyMapper.selectionIdFor(
@@ -37,7 +73,25 @@ class LegacyResultMapper {
         name: material.name,
       );
       final quantity = quantities[key];
-      if (quantity == null) continue; // legacy UI chỉ hiện material đã chọn.
+      // FIX-CALC-001 Phase 6 — material unsupported (catalogCode có trong
+      // danh sách chưa hỗ trợ) bị thiếu quantity: KHÔNG âm thầm biến mất,
+      // ghi nhận warning issue minh bạch thay vì `continue` im lặng.
+      if (quantity == null) {
+        if (material.catalogCode != null &&
+            LegacyMaterialSelectionKeyMapper.unsupportedCatalogCodes.contains(
+              material.catalogCode,
+            )) {
+          issues.add(
+            CalculationIssue(
+              section: 'materials',
+              code: 'material_not_supported',
+              severity: CalculationIssueSeverity.warning,
+              materialCode: material.catalogCode,
+            ),
+          );
+        }
+        continue; // vẫn bỏ qua khỏi materialLines vì không có số liệu thật.
+      }
       lines.add(
         ProjectMaterialLine(
           name: material.name,
@@ -48,7 +102,10 @@ class LegacyResultMapper {
       );
     }
 
-    return ProjectCalculationResult(materialLines: lines);
+    return ProjectCalculationResult(
+      materialLines: lines,
+      issues: issues,
+    );
   }
 
   /// `FoundationStructureResult` (core) → typed section — chép giá trị 1-1,
@@ -83,6 +140,7 @@ class LegacyResultMapper {
   }
 
   /// Gộp material + foundation thành một kết quả typed hoàn chỉnh.
+  /// Issues từ material result phải được giữ nguyên (FIX-CALC-001 Phase 5).
   static ProjectCalculationResult combine(
     ProjectCalculationResult materialResult,
     FoundationStructureSection? foundation,
@@ -90,6 +148,7 @@ class LegacyResultMapper {
     return ProjectCalculationResult(
       materialLines: materialResult.materialLines,
       foundation: foundation,
+      issues: materialResult.issues,
     );
   }
 }

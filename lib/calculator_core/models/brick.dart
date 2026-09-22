@@ -24,11 +24,17 @@ class Brick extends Material {
     this.brickWidth = 0.1,
     this.brickHeight = 0.05,
   }) : super(
-         name: 'Gạch xây',
-         type: MaterialType.brick,
-         measurementUnit: MeasurementUnit.piece,
-       );
+          name: 'Gạch xây',
+          type: MaterialType.brick,
+          measurementUnit: MeasurementUnit.piece,
+        );
 
+  /// FIX-CALC-001 Phase 8 AUDIT: legacy model API đã chết — mọi công thức
+  /// đi qua `MaterialCalculator.calculateBrickQuantity()`. Không có caller
+  /// nào trong lib/. Giữ lại để tương thích legacy, KHÔNG dùng cho code mới.
+  @Deprecated(
+    'Tính toán đã chuyển sang MaterialCalculator.calculateBrickQuantity()',
+  )
   @override
   double calculateQuantity(Map<String, dynamic> parameters) {
     // Logic tính toán đã được chuyển sang MaterialCalculator.calculateBrickQuantity()

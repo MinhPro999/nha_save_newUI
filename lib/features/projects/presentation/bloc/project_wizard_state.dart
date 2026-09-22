@@ -136,6 +136,13 @@ class ProjectWizardState extends Equatable {
       case 4:
         return details.isNotEmpty &&
             details.foundationSegments.every((item) => item.length > 0) &&
+            // FIX-CALC-001 Phase 3 — KHÔNG bắt buộc walls.isNotEmpty.
+            // Không nhập tường = hợp lệ: DefaultWallCalculator (tầng tính
+            // toán, Phase 1/2) sẽ ước lượng từ kích thước tầng. `every(...)`
+            // trên list rỗng trả true (vacuous truth) — đây là CHỦ ĐÍCH,
+            // không phải bug. KHÔNG sửa thành `walls.isNotEmpty &&` —
+            // chỉ reject khi người dùng ĐÃ THÊM dòng tường nhưng để
+            // trống/sai số (length/height <= 0 trên item đã tồn tại).
             details.walls.every(
               (item) => item.length > 0 && item.height > 0,
             ) &&

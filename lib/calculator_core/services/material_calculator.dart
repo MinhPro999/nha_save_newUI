@@ -100,30 +100,60 @@ class MaterialCalculator {
 
   /// Tính khối lượng cát bê tông
   /// Delegate cho CustomMaterialCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD API trong flow tổng hợp —
+  /// `_calculateFoundationMaterials` gán thẳng `foundationVolume` (m³) cho
+  /// 'Bê tông', KHÔNG gọi hàm này (hàm trả `volume × 0.7` = cát, khác ngữ
+  /// nghĩa). Không xoá để giữ tương thích legacy — không dùng cho code mới.
+  @Deprecated(
+    'Không được gọi từ calculateMaterialsFromDetailedParams '
+    '(mâu thuẫn ngữ nghĩa với đường chạy thật) — xem FIX-CALC-001 Phase 8.',
+  )
   static double calculateConcreteSandQuantity(Map<String, dynamic> parameters) {
     return CustomMaterialCalculator.calculateConcreteSandQuantity(parameters);
   }
 
   /// Tính diện tích gạch ốp lát 60x60
   /// Delegate cho TileCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD trong flow tổng hợp (không có nhánh
+  /// `_calculate*` nào gọi). Công thức thật sự là scope của FIX-CALC-002.
+  @Deprecated(
+    'Chưa được nối vào calculateMaterialsFromDetailedParams — FIX-CALC-002.',
+  )
   static double calculateTile6060Quantity(Map<String, dynamic> parameters) {
     return TileCalculator.calculateTile6060Quantity(parameters);
   }
 
   /// Tính diện tích ngói tây
   /// Delegate cho TileCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD trong flow tổng hợp — FIX-CALC-002.
+  @Deprecated(
+    'Chưa được nối vào calculateMaterialsFromDetailedParams — FIX-CALC-002.',
+  )
   static double calculateRoofTileQuantity(Map<String, dynamic> parameters) {
     return TileCalculator.calculateRoofTileQuantity(parameters);
   }
 
   /// Tính diện tích tôn thường
   /// Delegate cho TileCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD trong flow tổng hợp — FIX-CALC-002.
+  @Deprecated(
+    'Chưa được nối vào calculateMaterialsFromDetailedParams — FIX-CALC-002.',
+  )
   static double calculateMetalSheetQuantity(Map<String, dynamic> parameters) {
     return TileCalculator.calculateMetalSheetQuantity(parameters);
   }
 
   /// Tính diện tích tôn xốp
   /// Delegate cho TileCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD trong flow tổng hợp — FIX-CALC-002.
+  @Deprecated(
+    'Chưa được nối vào calculateMaterialsFromDetailedParams — FIX-CALC-002.',
+  )
   static double calculateInsulatedMetalQuantity(
     Map<String, dynamic> parameters,
   ) {
@@ -138,6 +168,11 @@ class MaterialCalculator {
 
   /// Tính diện tích sơn ngoại thất
   /// Delegate cho PaintCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD trong flow tổng hợp — FIX-CALC-002.
+  @Deprecated(
+    'Chưa được nối vào calculateMaterialsFromDetailedParams — FIX-CALC-002.',
+  )
   static double calculateExteriorPaintQuantity(
     Map<String, dynamic> parameters,
   ) {
@@ -160,6 +195,11 @@ class MaterialCalculator {
 
   /// Tính số lượng cửa nhựa composite
   /// Delegate cho DoorCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD trong flow tổng hợp — FIX-CALC-002.
+  @Deprecated(
+    'Chưa được nối vào calculateMaterialsFromDetailedParams — FIX-CALC-002.',
+  )
   static double calculateCompositeDoorQuantity(
     Map<String, dynamic> parameters,
   ) {
@@ -192,6 +232,14 @@ class MaterialCalculator {
 
   /// Tính khối lượng vật liệu tùy chỉnh
   /// Delegate cho CustomMaterialCalculator
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: DEAD — không có caller nào trong lib/;
+  /// vật liệu tùy chỉnh (catalogCode null) không có aggregated check trong
+  /// `calculateMaterialsFromDetailedParams`. Không xoá để giữ tương thích
+  /// legacy — không dùng cho code mới.
+  @Deprecated(
+    'Không có caller trong flow tổng hợp — xem FIX-CALC-001 Phase 8.',
+  )
   static double calculateCustomMaterialQuantity(
     Map<String, dynamic> parameters,
     String measurementUnit,
@@ -229,6 +277,13 @@ class MaterialCalculator {
     Map<String, double> quantities = {};
     Map<String, double> costs = {};
 
+    // FIX-CALC-001 Phase 5 — cô lập lỗi theo nhóm vật liệu (chỉ orchestration,
+    // KHÔNG đổi bất kỳ công thức nào bên trong các _calculate* helper).
+    // Lỗi bắt được PHẢI được ghi vào `calculationErrors` — nghiêm cấm nuốt
+    // im lặng. An toàn cho project cũ đã lưu DB với trạng thái lỗi + phòng
+    // vệ chung cho input dị dạng.
+    final calculationErrors = <String, Object>{};
+
     // Thông số gạch mặc định (m) - có thể được ghi đè bởi thông số từ MaterialProvider
     double brickLength = brickDimensions?['length'] ?? 0.22;
     double brickWidth = brickDimensions?['width'] ?? 0.10;
@@ -236,52 +291,70 @@ class MaterialCalculator {
 
     // Tính toán vật liệu cho tường
     if (detailedParams.containsKey('walls')) {
-      _calculateWallMaterials(
-        detailedParams,
-        selectedMaterialIds,
-        quantities,
-        intermediateResults,
-        brickLength,
-        brickWidth,
-        brickHeight,
-      );
+      try {
+        _calculateWallMaterials(
+          detailedParams,
+          selectedMaterialIds,
+          quantities,
+          intermediateResults,
+          brickLength,
+          brickWidth,
+          brickHeight,
+        );
+      } catch (e) {
+        calculationErrors['walls'] = e;
+      }
     }
 
     // Tính toán vật liệu cho móng
     if (detailedParams.containsKey('foundation')) {
-      _calculateFoundationMaterials(
-        detailedParams,
-        selectedMaterialIds,
-        quantities,
-        intermediateResults,
-      );
+      try {
+        _calculateFoundationMaterials(
+          detailedParams,
+          selectedMaterialIds,
+          quantities,
+          intermediateResults,
+        );
+      } catch (e) {
+        calculationErrors['foundation'] = e;
+      }
     }
 
     // Tính toán vật liệu cho cửa
     if (detailedParams.containsKey('doors')) {
-      _calculateDoorMaterials(
-        detailedParams,
-        selectedMaterialIds,
-        quantities,
-        intermediateResults,
-      );
+      try {
+        _calculateDoorMaterials(
+          detailedParams,
+          selectedMaterialIds,
+          quantities,
+          intermediateResults,
+        );
+      } catch (e) {
+        calculationErrors['doors'] = e;
+      }
     }
 
     // Tính toán vật liệu cho nhà vệ sinh và khác
     if (detailedParams.containsKey('others')) {
-      _calculateOtherMaterials(
-        detailedParams,
-        selectedMaterialIds,
-        quantities,
-        intermediateResults,
-        floors,
-      );
+      try {
+        _calculateOtherMaterials(
+          detailedParams,
+          selectedMaterialIds,
+          quantities,
+          intermediateResults,
+          floors,
+        );
+      } catch (e) {
+        calculationErrors['others'] = e;
+      }
     }
 
     return {
       'quantities': quantities,
       'costs': costs,
       'intermediateResults': intermediateResults,
+      // MỚI — rỗng nếu không có lỗi nào.
+      'errors': calculationErrors,
     };
   }
 

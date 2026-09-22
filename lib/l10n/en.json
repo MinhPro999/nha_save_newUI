@@ -248,5 +248,13 @@
   "project_material_labor_list": "Materials and labor",
   "project_no_materials": "No materials or labor have been selected for this project.",
   "project_total": "Total",
-  "project_edit_title": "Edit project"
+  "project_edit_title": "Edit project",
+  "calc_issue_walls_calculation_failed": "Wall-related materials could not be calculated. Go to Edit → Details step to review.",
+  "calc_issue_unknown_calculation_error": "Part of the quantity calculation failed. Go to Edit to review your inputs.",
+  "calc_issue_material_not_supported": "This material isn't supported for automatic quantity calculation yet, coming in a future update:",
+  "project_partial_result_banner_title": "Calculation incomplete",
+  "project_edit_cta": "Edit project",
+  "project_default_wall_badge": "Estimated",
+  "project_default_wall_hint": "Estimated from floor area — no detailed wall data entered",
+  "project_default_wall_banner": "Some materials (walls, interior paint...) are being estimated from floor area because you haven't entered detailed wall data in Step 5. Edit the project for a more precise result."
 }

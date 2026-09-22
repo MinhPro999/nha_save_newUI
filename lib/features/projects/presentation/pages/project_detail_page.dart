@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core_project/core/configs/theme/app_colors.dart';
 import 'package:flutter_core_project/features/projects/domain/entities/construction_project.dart';
 import 'package:flutter_core_project/features/projects/domain/services/calculation/project_calculation_result.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/wall_dependency_helper.dart';
 import 'package:flutter_core_project/features/projects/presentation/bloc/project_cubit.dart';
 import 'package:flutter_core_project/features/projects/presentation/bloc/project_state.dart';
 import 'package:flutter_core_project/features/projects/presentation/pages/project_wizard_page.dart';
@@ -143,6 +144,22 @@ class _ProjectDetailViewState extends State<_ProjectDetailView> {
     final totalCost = calculationResult?.totalCost ?? 0.0;
     final isCalculating =
         widget.calculationStatus == ProjectCalculationStatus.calculating;
+
+    // FIX-CALC-001 Phase 10 — 4 trạng thái chuẩn hoá:
+    // A. Chưa chọn vật tư: project.materials.isEmpty → _MaterialList hiển thị
+    //    project_no_materials (đúng nghĩa).
+    // B. Tính lỗi hoàn toàn: calculationStatus == failure (exception tầng
+    //    ngoài → result null) HOẶC result.status == 'failure' (toàn bộ nhóm
+    //    lỗi) → banner thân thiện theo code, KHÔNG in error.toString() thô.
+    // C. Thành công một phần: result.status == 'partial' → hiển thị đầy đủ
+    //    các dòng đã tính + banner cảnh báo liệt kê phần thiếu (issues).
+    // D. Thành công hoàn toàn: result.status == 'success' → bình thường.
+    final calculationFailed = widget.calculationStatus ==
+            ProjectCalculationStatus.failure ||
+        (calculationResult != null && calculationResult.status == 'failure');
+    final isPartial =
+        calculationResult != null && calculationResult.status == 'partial';
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -152,12 +169,46 @@ class _ProjectDetailViewState extends State<_ProjectDetailView> {
             const SliverToBoxAdapter(
               child: LinearProgressIndicator(minHeight: 2),
             ),
-          if (widget.calculationStatus == ProjectCalculationStatus.failure)
+          if (calculationFailed)
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(18, 12, 18, 0),
-                child: _CalculationErrorBanner(
-                  error: widget.calculationError ?? '?',
+                child: _CalculationIssuesBanner(
+                  issues: calculationResult?.issues.isNotEmpty == true
+                      ? calculationResult!.issues
+                      : const [
+                          // Exception tầng ngoài (result null) — không in
+                          // error.toString() thô cho người dùng cuối.
+                          CalculationIssue(
+                            section: 'others',
+                            code: 'unknown_calculation_error',
+                            severity: CalculationIssueSeverity.error,
+                          ),
+                        ],
+                  materials: project.materials,
+                  onEdit: () => _editProject(context),
+                ),
+              ),
+            ),
+          if (isPartial)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(18, 12, 18, 0),
+                child: _CalculationIssuesBanner(
+                  issues: calculationResult.issues,
+                  materials: project.materials,
+                  onEdit: () => _editProject(context),
+                ),
+              ),
+            ),
+          if (WallDependencyHelper.usesDefaultWallEstimate(project))
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(18, 12, 18, 0),
+                child: _DefaultWallEstimateBanner(
+                  text: context.tr('project_default_wall_banner'),
+                  hint: context.tr('project_default_wall_hint'),
+                  onEdit: () => _editProject(context),
                 ),
               ),
             ),
@@ -192,7 +243,14 @@ class _ProjectDetailViewState extends State<_ProjectDetailView> {
                       const SizedBox(height: 30),
                       _CostDistribution(lines: lines, total: totalCost),
                       const SizedBox(height: 30),
-                      _MaterialList(lines: lines, total: totalCost),
+                      _MaterialList(
+                        lines: lines,
+                        total: totalCost,
+                        // FIX-CALC-001 Phase 10 trạng thái B: project ĐÃ
+                        // chọn vật tư nhưng tính lỗi → KHÔNG hiển thị
+                        // "chưa chọn vật tư" gây hiểu lầm.
+                        showEmptyHint: project.materials.isEmpty,
+                      ),
                     ],
                   ),
                 ),
@@ -1304,10 +1362,18 @@ class _CostLegendRow extends StatelessWidget {
 }
 
 class _MaterialList extends StatelessWidget {
-  const _MaterialList({required this.lines, required this.total});
+  const _MaterialList({
+    required this.lines,
+    required this.total,
+    this.showEmptyHint = true,
+  });
 
   final List<ProjectMaterialLine> lines;
   final double total;
+
+  /// false khi project đã chọn vật tư nhưng chưa có dòng kết quả (vd lỗi
+  /// tính toán) — lúc đó không hiển thị panel "chưa chọn vật tư".
+  final bool showEmptyHint;
 
   @override
   Widget build(BuildContext context) {
@@ -1316,7 +1382,9 @@ class _MaterialList extends StatelessWidget {
       title: context.tr('project_material_labor_list'),
       icon: Icons.inventory_2_outlined,
       child: lines.isEmpty
-          ? _EmptyPanel(text: context.tr('project_no_materials'))
+          ? showEmptyHint
+              ? _EmptyPanel(text: context.tr('project_no_materials'))
+              : const SizedBox.shrink()
           : Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
@@ -1452,33 +1520,175 @@ class _MaterialRow extends StatelessWidget {
   }
 }
 
-class _CalculationErrorBanner extends StatelessWidget {
-  const _CalculationErrorBanner({required this.error});
+/// FIX-CALC-001 Phase 10.2 — banner lỗi/cảnh báo có cấu trúc.
+/// Mỗi issue tra l10n theo code ổn định (`calc_issue_<code>`), không in
+/// exception thô. Nếu issue có materialCode, ghép thêm tên vật liệu (tra từ
+/// snapshot project.materials) vào cuối câu — ghép ở code Dart vì
+/// `AppLocalizations.translate()` không hỗ trợ interpolation.
+class _CalculationIssuesBanner extends StatelessWidget {
+  const _CalculationIssuesBanner({
+    required this.issues,
+    required this.materials,
+    required this.onEdit,
+  });
 
-  final String error;
+  final List<CalculationIssue> issues;
+  final List<ProjectMaterial> materials;
+  final VoidCallback onEdit;
 
   @override
   Widget build(BuildContext context) {
+    final hasError =
+        issues.any((issue) => issue.severity == CalculationIssueSeverity.error);
+    final title =
+        hasError ? null : context.tr('project_partial_result_banner_title');
+    final color = hasError ? const Color(0xFFE55C4A) : const Color(0xFFE58A19);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFE55C4A).withValues(alpha: 0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: const Color(0xFFE55C4A).withValues(alpha: 0.35),
+        border: Border.all(color: color.withValues(alpha: 0.35)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (title != null) ...[
+            Row(
+              children: [
+                Icon(Icons.warning_amber_rounded, color: color, size: 18),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: color,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+          ],
+          for (final issue in issues) ...[
+            _issueRow(context, issue, color),
+            if (issue != issues.last) const SizedBox(height: 6),
+          ],
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: onEdit,
+              style: TextButton.styleFrom(
+                foregroundColor: color,
+                visualDensity: VisualDensity.compact,
+              ),
+              child: Text(context.tr('project_edit_cta')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _issueRow(
+    BuildContext context,
+    CalculationIssue issue,
+    Color color,
+  ) {
+    final message = context.tr('calc_issue_${issue.code}');
+    final materialName = issue.materialCode == null
+        ? null
+        : _materialNameByCatalogCode(issue.materialCode!);
+    final text = materialName == null ? message : '$message $materialName';
+    final isError = issue.severity == CalculationIssueSeverity.error;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          isError ? Icons.error_outline_rounded : Icons.info_outline_rounded,
+          color: color,
+          size: 16,
         ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ),
+      ],
+    );
+  }
+
+  String? _materialNameByCatalogCode(String catalogCode) {
+    for (final material in materials) {
+      if (material.catalogCode == catalogCode) return material.name;
+    }
+    return null;
+  }
+}
+
+/// FIX-CALC-001 Phase 10.3 — banner minh bạch "ước tính mặc định".
+/// Bắt buộc người dùng biết số nào là máy ước lượng (Default Wall) thay vì
+/// họ tự nhập — tránh hiểu nhầm con số ước lượng là số đo thật.
+class _DefaultWallEstimateBanner extends StatelessWidget {
+  const _DefaultWallEstimateBanner({
+    required this.text,
+    required this.hint,
+    required this.onEdit,
+  });
+
+  final String text;
+  final String hint;
+  final VoidCallback onEdit;
+
+  @override
+  Widget build(BuildContext context) {
+    const color = Color(0xFFE58A19);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withValues(alpha: 0.35)),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.error_outline_rounded, color: Color(0xFFE55C4A)),
-          const SizedBox(width: 10),
+          const Icon(Icons.auto_awesome_rounded, color: color, size: 18),
+          const SizedBox(width: 8),
           Expanded(
-            child: Text(
-              error,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  text,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  hint,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontStyle: FontStyle.italic,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: onEdit,
+                    style: TextButton.styleFrom(
+                      foregroundColor: color,
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    child: Text(context.tr('project_edit_cta')),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

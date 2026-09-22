@@ -1,5 +1,34 @@
 import 'package:equatable/equatable.dart';
 
+/// Mức độ nghiêm trọng của một vấn đề tính toán.
+enum CalculationIssueSeverity { warning, error }
+
+/// Vấn đề phát sinh khi tính toán — kênh giao tiếp có cấu trúc giữa domain
+/// và UI (FIX-CALC-001 Phase 4), thay cho exception string thô.
+class CalculationIssue extends Equatable {
+  const CalculationIssue({
+    required this.section,
+    required this.code,
+    required this.severity,
+    this.materialCode,
+  });
+
+  /// Nhóm dữ liệu liên quan: 'walls' | 'foundation' | 'doors' | 'others' |
+  /// 'materials' | catalogCode cụ thể.
+  final String section;
+
+  /// Mã ổn định, KHÔNG phải chuỗi tiếng Việt tự do — UI tra l10n theo code.
+  final String code;
+
+  final CalculationIssueSeverity severity;
+
+  /// catalogCode liên quan, nếu có (VD 'interior_paint', 'tile').
+  final String? materialCode;
+
+  @override
+  List<Object?> get props => [section, code, severity, materialCode];
+}
+
 /// Dòng kết quả vật liệu — typed boundary, thay cho raw legacy Map ra UI.
 ///
 /// - [quantity]: lấy nguyên từ legacy core (đã round 2 chữ số bởi legacy).
@@ -186,14 +215,33 @@ class ProjectCalculationResult extends Equatable {
   const ProjectCalculationResult({
     this.materialLines = const [],
     this.foundation,
+    this.issues = const [],
   });
 
   final List<ProjectMaterialLine> materialLines;
   final FoundationStructureSection? foundation;
 
+  /// Danh sách vấn đề phát sinh khi tính toán — rỗng nếu hoàn toàn thành
+  /// công. Cho phép phân biệt success / partial / failure mà KHÔNG dùng
+  /// exception text làm kênh giao tiếp domain → UI.
+  final List<CalculationIssue> issues;
+
+  bool get hasErrors =>
+      issues.any((i) => i.severity == CalculationIssueSeverity.error);
+  bool get hasWarnings =>
+      issues.any((i) => i.severity == CalculationIssueSeverity.warning);
+
+  /// success: không issue nào | partial: có issue nhưng vẫn có materialLines
+  /// | failure: có issue error và materialLines rỗng hoàn toàn.
+  String get status {
+    if (issues.isEmpty) return 'success';
+    if (materialLines.isNotEmpty) return 'partial';
+    return 'failure';
+  }
+
   /// Tổng cost = Σ line.cost (legacy convention: không round).
   double get totalCost => materialLines.fold(0, (sum, line) => sum + line.cost);
 
   @override
-  List<Object?> get props => [materialLines, foundation];
+  List<Object?> get props => [materialLines, foundation, issues];
 }

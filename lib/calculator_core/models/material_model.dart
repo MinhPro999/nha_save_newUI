@@ -64,16 +64,28 @@ abstract class Material {
   double calculateQuantity(Map<String, dynamic> parameters);
 
   /// Tính tổng chi phí dựa trên số lượng và giá mỗi đơn vị
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: legacy model helper, không có caller nào
+  /// trong lib/ — new app dùng `ProjectMaterialLine.cost` (typed boundary).
+  @Deprecated('Dùng ProjectMaterialLine.cost thay thế.')
   double calculateCost(Map<String, dynamic> parameters) {
     return calculateQuantity(parameters) * pricePerUnit;
   }
 
   /// Lấy số lượng đã định dạng
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: legacy model helper, không có caller nào
+  /// trong lib/.
+  @Deprecated('Legacy helper — UI new dùng ProjectMaterialLine.')
   String getFormattedQuantity(Map<String, dynamic> parameters) {
     return NumberFormatter.format(calculateQuantity(parameters));
   }
 
   /// Lấy chi phí đã định dạng
+  ///
+  /// FIX-CALC-001 Phase 8 AUDIT: legacy model helper, không có caller nào
+  /// trong lib/.
+  @Deprecated('Legacy helper — UI new dùng ProjectMaterialLine.')
   String getFormattedCost(Map<String, dynamic> parameters) {
     return NumberFormatter.formatCurrency(calculateCost(parameters));
   }
