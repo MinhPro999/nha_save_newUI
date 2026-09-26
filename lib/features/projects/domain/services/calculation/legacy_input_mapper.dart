@@ -64,36 +64,48 @@ class LegacyInputMapper {
   }) {
     final details = project.details;
 
-    // ── Walls: ưu tiên WallSpec thật, fallback Default Wall ──────────
-    // FIX-CALC-001 Phase 2:
-    // - Có >= 1 item hợp lệ (length>0 && height>0) → dùng ĐÚNG VÀ CHỈ các
-    //   item hợp lệ đó, KHÔNG cộng thêm Default Wall (tránh double-count).
-    // - Không có item hợp lệ nào VÀ có vật liệu phụ thuộc tường được chọn
-    //   → Default Wall Calculator (Phase 1).
-    //   Điều kiện "có vật liệu phụ thuộc tường" giữ nguyên canonical input
-    //   của golden cases (foundation-only có selectedMaterialIds rỗng →
-    //   walls vẫn là list rỗng như legacy) — kết quả golden KHÔNG đổi.
-    final explicitWalls = details.walls
-        .where((wall) => wall.length > 0 && wall.height > 0)
-        .toList();
+    // ── Walls: business rule chốt — PHASE2.1R_FIX-CALC-001_RESIDUAL ──
+    //   walls == []                     → Default Wall (chỉ khi có vật liệu
+    //                                     phụ thuộc tường được chọn).
+    //   walls non-empty + MỌI item hợp lệ (length>0 && height>0)
+    //                                   → dùng ĐÚNG WallSpec, KHÔNG cộng
+    //                                     thêm Default Wall.
+    //   walls non-empty + có >= 1 item không hợp lệ
+    //                                   → STRUCTURED ERROR. KHÔNG fallback
+    //                                     Default Wall, KHÔNG lọc bỏ item,
+    //                                     KHÔNG normalize im lặng.
+    // KHÔNG dùng filter làm căn cứ xác định list rỗng — filter sẽ biến
+    // "non-empty + invalid" thành "empty" và fallback Default Wall sai rule.
+    final hasExplicitWalls = details.walls.isNotEmpty;
+    final hasInvalidExplicitWall = details.walls.any(
+      (wall) => wall.length <= 0 || wall.height <= 0,
+    );
 
-    final walls = explicitWalls.isNotEmpty
-        ? explicitWalls
-            .map((wall) => <String, dynamic>{
-                  'type': mapWallType(wall.type),
-                  'plasterSides': wall.plasterSides,
-                  'length': wall.length,
-                  'height': wall.height,
-                  'area': wall.area,
-                  // Lưu ý: KHÔNG thêm key mới vào entry explicit — golden
-                  // test deep-compare detailedParams theo shape legacy.
-                })
-            .toList()
-        : WallDependencyHelper.hasWallDependentMaterial(project)
-            ? DefaultWallCalculator.buildDefaultWallEntries(
-                floors: project.floors,
-              )
-            : <Map<String, dynamic>>[];
+    final List<Map<String, dynamic>> walls;
+    if (!hasExplicitWalls) {
+      walls = WallDependencyHelper.hasWallDependentMaterial(project)
+          ? DefaultWallCalculator.buildDefaultWallEntries(
+              floors: project.floors,
+            )
+          : <Map<String, dynamic>>[];
+    } else if (hasInvalidExplicitWall) {
+      // Boundary dữ liệu: invalid input → validation error, KHÔNG biến
+      // thành default calculation. LegacyCalculationService bắt exception
+      // này và chuyển thành CalculationIssue(code: 'invalid_wall_spec').
+      throw const InvalidWallSpecException();
+    } else {
+      walls = details.walls
+          .map((wall) => <String, dynamic>{
+                'type': mapWallType(wall.type),
+                'plasterSides': wall.plasterSides,
+                'length': wall.length,
+                'height': wall.height,
+                'area': wall.area,
+                // Lưu ý: KHÔNG thêm key mới vào entry explicit — golden
+                // test deep-compare detailedParams theo shape legacy.
+              })
+          .toList();
+    }
     final totalWallArea =
         walls.fold<double>(0, (sum, wall) => sum + (wall['area'] as double));
 
@@ -330,4 +342,23 @@ class LegacyInputMapper {
       height: pileCap.height,
     );
   }
+}
+
+/// WallSpec nhập vào có ít nhất một item không hợp lệ
+/// (`length <= 0` hoặc `height <= 0`) — business rule FIX-CALC-001R:
+///
+/// - KHÔNG fallback Default Wall,
+/// - KHÔNG lọc bỏ item,
+/// - KHÔNG normalize im lặng.
+///
+/// [LegacyCalculationService] bắt exception này ở tầng orchestration và
+/// chuyển thành `CalculationIssue(code: 'invalid_wall_spec', severity:
+/// error)` — UI không bao giờ đọc `toString()` của exception này.
+class InvalidWallSpecException implements Exception {
+  const InvalidWallSpecException();
+
+  @override
+  String toString() =>
+      'InvalidWallSpecException: WallSpec chứa item không hợp lệ '
+      '(length <= 0 hoặc height <= 0)';
 }

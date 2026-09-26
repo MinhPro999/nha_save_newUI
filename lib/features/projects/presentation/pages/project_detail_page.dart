@@ -56,23 +56,22 @@ class ProjectDetailPage extends StatelessWidget {
         }
 
         // Chỉ dùng kết quả calculation của CHÍNH project này (tránh stale).
-        final calculationResult = state.calculationProjectId == project.id
-            ? state.calculationResult
-            : null;
+        final isCurrentProject = state.calculationProjectId == project.id;
+        final calculationResult =
+            isCurrentProject ? state.calculationResult : null;
 
         return _ProjectDetailView(
           key: const Key('projectDetailPage'),
           project: project,
           isSaving: state.status == ProjectStatus.saving,
           allowEditing: allowEditing,
-          calculationStatus: calculationResult == null &&
-                  state.calculationProjectId == project.id
+          // FIX-CALC-001R: calculationStatus đã được Cubit map 1-1 từ
+          // result.status — UI chỉ đọc MỘT nguồn, không derive lại từ result.
+          calculationStatus: isCurrentProject
               ? state.calculationStatus
               : ProjectCalculationStatus.idle,
           calculationResult: calculationResult,
-          calculationError: state.calculationProjectId == project.id
-              ? state.calculationError
-              : null,
+          calculationError: isCurrentProject ? state.calculationError : null,
         );
       },
     );
@@ -149,16 +148,18 @@ class _ProjectDetailViewState extends State<_ProjectDetailView> {
     // A. Chưa chọn vật tư: project.materials.isEmpty → _MaterialList hiển thị
     //    project_no_materials (đúng nghĩa).
     // B. Tính lỗi hoàn toàn: calculationStatus == failure (exception tầng
-    //    ngoài → result null) HOẶC result.status == 'failure' (toàn bộ nhóm
-    //    lỗi) → banner thân thiện theo code, KHÔNG in error.toString() thô.
-    // C. Thành công một phần: result.status == 'partial' → hiển thị đầy đủ
-    //    các dòng đã tính + banner cảnh báo liệt kê phần thiếu (issues).
-    // D. Thành công hoàn toàn: result.status == 'success' → bình thường.
-    final calculationFailed = widget.calculationStatus ==
-            ProjectCalculationStatus.failure ||
-        (calculationResult != null && calculationResult.status == 'failure');
+    //    ngoài → result null, HOẶC result.status == 'failure' đã được Cubit
+    //    map 1-1) → banner thân thiện theo code, KHÔNG in error.toString().
+    // C. Thành công một phần: calculationStatus == partial (Cubit map từ
+    //    result.status == 'partial') → hiển thị đầy đủ các dòng đã tính +
+    //    banner cảnh báo liệt kê phần thiếu (issues).
+    // D. Thành công hoàn toàn: calculationStatus == success → bình thường.
+    // FIX-CALC-001R — single source of truth: KHÔNG đọc lại result.status
+    // ở đây (tránh 2 nơi suy diễn mâu thuẫn nhau).
+    final calculationFailed =
+        widget.calculationStatus == ProjectCalculationStatus.failure;
     final isPartial =
-        calculationResult != null && calculationResult.status == 'partial';
+        widget.calculationStatus == ProjectCalculationStatus.partial;
 
     return Scaffold(
       body: CustomScrollView(
@@ -195,7 +196,7 @@ class _ProjectDetailViewState extends State<_ProjectDetailView> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(18, 12, 18, 0),
                 child: _CalculationIssuesBanner(
-                  issues: calculationResult.issues,
+                  issues: calculationResult?.issues ?? const [],
                   materials: project.materials,
                   onEdit: () => _editProject(context),
                 ),

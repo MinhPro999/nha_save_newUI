@@ -66,6 +66,12 @@ class LegacyResultMapper {
     // → structured issues, KHÔNG để exception text lọt tới UI.
     final issues = _mapIssues(legacyResults);
 
+    // FIX-CALC-001R: nếu đã có lỗi section thì nguyên nhân thiếu quantity
+    // đã được báo qua issue của section — không sinh thêm
+    // `material_calculation_missing` cho từng material (tránh double-report).
+    final rawErrors = legacyResults['errors'];
+    final hasSectionErrors = rawErrors is Map && rawErrors.isNotEmpty;
+
     final lines = <ProjectMaterialLine>[];
     for (final material in materials) {
       final key = LegacyMaterialSelectionKeyMapper.selectionIdFor(
@@ -73,9 +79,11 @@ class LegacyResultMapper {
         name: material.name,
       );
       final quantity = quantities[key];
-      // FIX-CALC-001 Phase 6 — material unsupported (catalogCode có trong
-      // danh sách chưa hỗ trợ) bị thiếu quantity: KHÔNG âm thầm biến mất,
-      // ghi nhận warning issue minh bạch thay vì `continue` im lặng.
+      // FIX-CALC-001R — quantity == null KHÔNG được silent drop:
+      // - known unsupported catalog (Phase 6) → warning `material_not_supported`.
+      // - unknown/unmapped/custom còn lại → error `material_calculation_missing`
+      //   (materialCode = catalogCode, null với vật liệu tùy chỉnh).
+      // - KHÔNG đổi null → 0 để che missing calculation.
       if (quantity == null) {
         if (material.catalogCode != null &&
             LegacyMaterialSelectionKeyMapper.unsupportedCatalogCodes.contains(
@@ -86,6 +94,15 @@ class LegacyResultMapper {
               section: 'materials',
               code: 'material_not_supported',
               severity: CalculationIssueSeverity.warning,
+              materialCode: material.catalogCode,
+            ),
+          );
+        } else if (!hasSectionErrors) {
+          issues.add(
+            CalculationIssue(
+              section: 'materials',
+              code: 'material_calculation_missing',
+              severity: CalculationIssueSeverity.error,
               materialCode: material.catalogCode,
             ),
           );

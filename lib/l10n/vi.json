@@ -252,6 +252,8 @@
   "calc_issue_walls_calculation_failed": "Không thể tính vật tư liên quan đến Tường. Vào Chỉnh sửa → bước Thông số chi tiết để kiểm tra lại.",
   "calc_issue_unknown_calculation_error": "Có lỗi khi tính một phần khối lượng. Vào Chỉnh sửa để kiểm tra lại thông số đã nhập.",
   "calc_issue_material_not_supported": "Vật liệu này hiện chưa được hỗ trợ tính khối lượng tự động, sẽ được cập nhật trong bản sau:",
+  "calc_issue_invalid_wall_spec": "Thông số Tường không hợp lệ (chiều dài và chiều cao phải lớn hơn 0). Vào Chỉnh sửa → bước Thông số chi tiết để sửa lại.",
+  "calc_issue_material_calculation_missing": "Không tính được khối lượng cho vật liệu này. Vào Chỉnh sửa để kiểm tra thông số đã nhập.",
   "project_partial_result_banner_title": "Kết quả tính toán chưa đầy đủ",
   "project_edit_cta": "Chỉnh sửa dự án",
   "project_default_wall_badge": "Ước tính",

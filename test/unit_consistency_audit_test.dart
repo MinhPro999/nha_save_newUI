@@ -1,6 +1,7 @@
 import 'package:flutter_core_project/features/projects/domain/entities/construction_project.dart';
 import 'package:flutter_core_project/features/projects/domain/services/calculation/legacy_calculation_service.dart';
 import 'package:flutter_core_project/features/projects/domain/services/calculation/legacy_material_selection_key_mapper.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/project_calculation_result.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// FIX-CALC-001 Phase 7 — AUDIT tính nhất quán đơn vị
@@ -201,5 +202,56 @@ void main() {
         );
       }
     }
+  });
+
+  group('FIX-CALC-001R — quantity null qua full service (không silent drop)',
+      () {
+    test('6 unsupported codes → warning material_not_supported, không dòng',
+        () {
+      const service = LegacyCalculationService();
+      for (final code
+          in LegacyMaterialSelectionKeyMapper.unsupportedCatalogCodes) {
+        final material = materialFor(code, 'Material $code', 'unit', 1000.0);
+        final result = service.calculate(buildProjectFor(material));
+
+        expect(
+          result.materialLines,
+          isEmpty,
+          reason: '[$code] unsupported KHÔNG được sinh dòng quantity',
+        );
+        expect(
+          result.issues.where((i) => i.code == 'material_not_supported'),
+          hasLength(1),
+          reason: '[$code] phải có warning material_not_supported',
+        );
+        expect(
+          result.issues.where((i) => i.code == 'material_not_supported').single
+              .severity,
+          CalculationIssueSeverity.warning,
+          reason: '[$code] phải là warning, không phải error',
+        );
+      }
+    });
+
+    test('unknown catalog → error material_calculation_missing', () {
+      const service = LegacyCalculationService();
+      final material = materialFor(
+        'future_material',
+        'Vật liệu tương lai',
+        'm2',
+        1000.0,
+      );
+      final result = service.calculate(buildProjectFor(material));
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'material_calculation_missing');
+      expect(
+        result.issues.single.severity,
+        CalculationIssueSeverity.error,
+      );
+      expect(result.issues.single.materialCode, 'future_material');
+      expect(result.status, 'failure');
+    });
   });
 }

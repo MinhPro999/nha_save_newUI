@@ -34,9 +34,19 @@ class ProjectCubit extends Cubit<ProjectState> {
     );
     try {
       final result = await _calculateProject(project);
+      // FIX-CALC-001R: completed state phản ánh typed result — KHÔNG để
+      // Cubit=success trong khi result.status=partial/failure.
+      // `ProjectCalculationResult.status` là source of truth duy nhất cho
+      // trạng thái calculation hoàn tất.
+      final status = switch (result.status) {
+        'success' => ProjectCalculationStatus.success,
+        'partial' => ProjectCalculationStatus.partial,
+        'failure' => ProjectCalculationStatus.failure,
+        _ => ProjectCalculationStatus.failure,
+      };
       emit(
         state.copyWith(
-          calculationStatus: ProjectCalculationStatus.success,
+          calculationStatus: status,
           calculationProjectId: project.id,
           calculationResult: result,
         ),

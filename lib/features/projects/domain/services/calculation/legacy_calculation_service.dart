@@ -28,7 +28,22 @@ class LegacyCalculationService implements CalculationService {
   @override
   ProjectCalculationResult calculate(ConstructionProject project) {
     // ── Input mapping ──────────────────────────────────────────────────
-    final materialInput = LegacyInputMapper.mapMaterialInput(project);
+    // FIX-CALC-001R: WallSpec non-empty + invalid → STRUCTURED ERROR,
+    // KHÔNG fallback Default Wall (LegacyInputMapper ném typed exception).
+    final LegacyMaterialInput materialInput;
+    try {
+      materialInput = LegacyInputMapper.mapMaterialInput(project);
+    } on InvalidWallSpecException {
+      return const ProjectCalculationResult(
+        issues: [
+          CalculationIssue(
+            section: 'walls',
+            code: 'invalid_wall_spec',
+            severity: CalculationIssueSeverity.error,
+          ),
+        ],
+      );
+    }
     final foundationInput = LegacyInputMapper.mapFoundationInput(project);
 
     // ── calculator_core (legacy engine nguyên vẹn) ────────────────────

@@ -305,8 +305,9 @@ void main() {
     });
 
     test(
-        'REG-003: WallSpec đã thêm dòng nhưng chưa nhập số '
-        '(length=0, height=0) → coi như không hợp lệ → Default Wall', () async {
+        'REG-003 (FIX-CALC-001R): WallSpec đã thêm dòng nhưng chưa nhập số '
+        '(length=0, height=0) → invalid input → error, KHÔNG fallback '
+        'Default Wall', () async {
       const service = LegacyCalculationService();
       final result = service.calculate(
         buildProject(
@@ -322,10 +323,93 @@ void main() {
         ),
       );
 
-      final paint = result.materialLines.firstWhere(
-        (line) => line.name == 'Sơn nội thất',
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'invalid_wall_spec');
+      expect(result.issues.single.section, 'walls');
+      expect(result.issues.single.severity, CalculationIssueSeverity.error);
+      expect(result.status, 'failure');
+    });
+
+    test(
+        'REG-R3 (FIX-CALC-001R): walls = [valid, invalid(length=0)] → '
+        'error invalid_wall_spec, KHÔNG fallback Default Wall, KHÔNG tự bỏ '
+        'item', () async {
+      const service = LegacyCalculationService();
+      final result = service.calculate(
+        buildProject(
+          materials: const [interiorPaint],
+          walls: const [
+            WallSpec(
+              type: WallType.wall100,
+              plasterSides: 2,
+              length: 4,
+              height: 3.3,
+            ),
+            WallSpec(
+              type: WallType.wall200,
+              plasterSides: 1,
+              length: 0,
+              height: 3,
+            ),
+          ],
+        ),
       );
-      expect(paint.quantity, closeTo(356.4, 1e-9));
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'invalid_wall_spec');
+      expect(result.issues.single.section, 'walls');
+      expect(result.issues.single.severity, CalculationIssueSeverity.error);
+      expect(result.status, 'failure');
+    });
+
+    test(
+        'REG-R4 (FIX-CALC-001R): walls = [invalid(length=0, height=3)] → '
+        'error, KHÔNG Default Wall', () async {
+      const service = LegacyCalculationService();
+      final result = service.calculate(
+        buildProject(
+          materials: const [interiorPaint],
+          walls: const [
+            WallSpec(
+              type: WallType.wall100,
+              plasterSides: 2,
+              length: 0,
+              height: 3,
+            ),
+          ],
+        ),
+      );
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'invalid_wall_spec');
+      expect(result.status, 'failure');
+    });
+
+    test(
+        'REG-R5 (FIX-CALC-001R): walls = [invalid(length=5, height=0)] → '
+        'error, KHÔNG Default Wall', () async {
+      const service = LegacyCalculationService();
+      final result = service.calculate(
+        buildProject(
+          materials: const [interiorPaint],
+          walls: const [
+            WallSpec(
+              type: WallType.wall200,
+              plasterSides: 2,
+              length: 5,
+              height: 0,
+            ),
+          ],
+        ),
+      );
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'invalid_wall_spec');
+      expect(result.status, 'failure');
     });
 
     test(
@@ -584,6 +668,170 @@ void main() {
       expect(result.hasWarnings, isTrue);
       expect(result.hasErrors, isFalse);
       expect(result.status, 'partial');
+    });
+  });
+
+  group('FIX-CALC-001R — quantity null KHÔNG silent drop', () {
+    const tile = ProjectMaterial(
+      selectionKey: 'k-tile',
+      catalogCode: 'tile',
+      name: 'Gạch lát nền 60x60',
+      unit: 'm2',
+      unitPrice: 150000,
+      type: ProjectMaterialType.material,
+    );
+    const futureMaterial = ProjectMaterial(
+      selectionKey: 'k-future',
+      catalogCode: 'future_material',
+      name: 'Vật liệu tương lai',
+      unit: 'm2',
+      unitPrice: 999000,
+      type: ProjectMaterialType.material,
+    );
+    const brick = ProjectMaterial(
+      selectionKey: 'k-brick',
+      catalogCode: 'brick',
+      name: 'Gạch xây',
+      unit: 'piece',
+      unitPrice: 1500,
+      type: ProjectMaterialType.material,
+    );
+
+    test(
+        'REG-R6: known unsupported (tile) → warning material_not_supported, '
+        'không phải error', () {
+      final legacyResults = <String, dynamic>{
+        'quantities': <String, dynamic>{},
+        'costs': <String, dynamic>{},
+        'intermediateResults': <String, dynamic>{},
+        'errors': <String, dynamic>{},
+      };
+
+      final result = LegacyResultMapper.mapMaterialResult(
+        legacyResults,
+        const [tile],
+      );
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'material_not_supported');
+      expect(result.issues.single.severity, CalculationIssueSeverity.warning);
+      expect(result.issues.single.materialCode, 'tile');
+      expect(result.hasErrors, isFalse);
+      expect(result.hasWarnings, isTrue);
+      expect(result.status, 'failure');
+    });
+
+    test(
+        'REG-R7: unknown catalog (future_material) quantity null → error '
+        'material_calculation_missing, materialCode = catalogCode', () {
+      final legacyResults = <String, dynamic>{
+        'quantities': <String, dynamic>{},
+        'costs': <String, dynamic>{},
+        'intermediateResults': <String, dynamic>{},
+        'errors': <String, dynamic>{},
+      };
+
+      final result = LegacyResultMapper.mapMaterialResult(
+        legacyResults,
+        const [futureMaterial],
+      );
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'material_calculation_missing');
+      expect(result.issues.single.severity, CalculationIssueSeverity.error);
+      expect(result.issues.single.materialCode, 'future_material');
+      expect(result.hasErrors, isTrue);
+      expect(result.status, 'failure');
+    });
+
+    test(
+        'REG-R8: mixed brick(success) + tile(warning) + future_material'
+        '(error) → brick line vẫn tồn tại, các issue độc lập, không crash', () {
+      final legacyResults = <String, dynamic>{
+        'quantities': <String, dynamic>{'Gạch xây': 100.0},
+        'costs': <String, dynamic>{},
+        'intermediateResults': <String, dynamic>{},
+        'errors': <String, dynamic>{},
+      };
+
+      final result = LegacyResultMapper.mapMaterialResult(
+        legacyResults,
+        const [brick, tile, futureMaterial],
+      );
+
+      expect(result.materialLines, hasLength(1));
+      expect(result.materialLines.single.name, 'Gạch xây');
+      expect(result.materialLines.single.quantity, 100.0);
+
+      final codes = result.issues.map((issue) => issue.code).toSet();
+      expect(codes, {'material_not_supported', 'material_calculation_missing'});
+      expect(result.hasWarnings, isTrue);
+      expect(result.hasErrors, isTrue);
+      // brick thành công + có issue → partial (không thành failure).
+      expect(result.status, 'partial');
+    });
+
+    test(
+        'custom material (catalogCode null) quantity null → error '
+        'material_calculation_missing, materialCode null', () {
+      const custom = ProjectMaterial(
+        selectionKey: 'k-custom',
+        catalogCode: null,
+        name: 'Vật liệu tùy chỉnh',
+        unit: 'm2',
+        unitPrice: 50000,
+        type: ProjectMaterialType.material,
+      );
+      final legacyResults = <String, dynamic>{
+        'quantities': <String, dynamic>{},
+        'costs': <String, dynamic>{},
+        'intermediateResults': <String, dynamic>{},
+        'errors': <String, dynamic>{},
+      };
+
+      final result = LegacyResultMapper.mapMaterialResult(
+        legacyResults,
+        const [custom],
+      );
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'material_calculation_missing');
+      expect(result.issues.single.severity, CalculationIssueSeverity.error);
+      expect(result.issues.single.materialCode, isNull);
+    });
+
+    test(
+        'section error đã báo nguyên nhân → KHÔNG double-report '
+        'material_calculation_missing cho từng material', () {
+      final legacyResults = <String, dynamic>{
+        'quantities': <String, dynamic>{},
+        'costs': <String, dynamic>{},
+        'intermediateResults': <String, dynamic>{},
+        'errors': <String, dynamic>{
+          'walls': Exception('Diện tích sơn nội thất phải lớn hơn 0'),
+        },
+      };
+      const paint = ProjectMaterial(
+        selectionKey: 'k-paint',
+        catalogCode: 'interior_paint',
+        name: 'Sơn nội thất',
+        unit: 'm2',
+        unitPrice: 65000,
+        type: ProjectMaterialType.material,
+      );
+
+      final result = LegacyResultMapper.mapMaterialResult(
+        legacyResults,
+        const [paint],
+      );
+
+      expect(result.materialLines, isEmpty);
+      expect(result.issues, hasLength(1));
+      expect(result.issues.single.code, 'walls_calculation_failed');
+      expect(result.status, 'failure');
     });
   });
 

@@ -4,7 +4,13 @@ import 'package:flutter_core_project/features/projects/domain/services/calculati
 
 enum ProjectStatus { initial, loading, success, failure, saving }
 
-enum ProjectCalculationStatus { idle, calculating, success, failure }
+/// Lifecycle của một lần calculation trong Cubit.
+///
+/// FIX-CALC-001R: sau khi calculation hoàn tất, [ProjectCubit] phải map
+/// `ProjectCalculationResult.status` (success/partial/failure) 1-1 sang enum
+/// này — KHÔNG có 2 source of truth mâu thuẫn (vd Cubit=success mà
+/// Result=failure). `calculating` là trạng thái transient duy nhất.
+enum ProjectCalculationStatus { idle, calculating, success, partial, failure }
 
 class ProjectState extends Equatable {
   const ProjectState({
