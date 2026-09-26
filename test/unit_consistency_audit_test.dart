@@ -225,7 +225,9 @@ void main() {
           reason: '[$code] phải có warning material_not_supported',
         );
         expect(
-          result.issues.where((i) => i.code == 'material_not_supported').single
+          result.issues
+              .where((i) => i.code == 'material_not_supported')
+              .single
               .severity,
           CalculationIssueSeverity.warning,
           reason: '[$code] phải là warning, không phải error',
