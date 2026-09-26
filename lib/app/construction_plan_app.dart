@@ -10,6 +10,8 @@ import 'package:flutter_core_project/features/material_library/domain/usecases/s
 import 'package:flutter_core_project/features/material_library/presentation/bloc/material_library_cubit.dart';
 import 'package:flutter_core_project/features/projects/data/project_repository_impl.dart';
 import 'package:flutter_core_project/features/projects/data/project_store.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/legacy_calculation_service.dart';
+import 'package:flutter_core_project/features/projects/domain/usecases/calculate_project.dart';
 import 'package:flutter_core_project/features/projects/domain/usecases/get_projects.dart';
 import 'package:flutter_core_project/features/projects/domain/usecases/save_project.dart';
 import 'package:flutter_core_project/features/projects/presentation/bloc/project_cubit.dart';
@@ -100,9 +102,15 @@ class ConstructionPlanApp extends StatelessWidget {
     }
 
     final repository = ProjectRepositoryImpl(store ?? InMemoryProjectStore());
+    // Production calculation: LUÔN real engine (LegacyCalculationService),
+    // KHÔNG dùng Mock — Mock chỉ cho test isolation.
+    final calculateProject = sl.isRegistered<CalculateProject>()
+        ? sl<CalculateProject>()
+        : const CalculateProject(LegacyCalculationService());
     return ProjectCubit(
       getProjects: GetProjects(repository),
       saveProject: SaveProject(repository),
+      calculateProject: calculateProject,
     );
   }
 }

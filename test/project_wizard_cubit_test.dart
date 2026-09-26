@@ -156,4 +156,92 @@ void main() {
     expect(updated.name, 'Nhà phố đã sửa');
     expect(updated.updatedAt.isAfter(source.updatedAt), isTrue);
   });
+
+  group('FIX-CALC-001 Phase 3 — wizard không chặn khi walls trống', () {
+    ProjectWizardCubit buildWizardAtStep4() {
+      final wizardCubit = ProjectWizardCubit();
+      addTearDown(wizardCubit.close);
+      wizardCubit.updateBasicInfo(name: 'Nhà không tường', location: 'Hà Nội');
+      expect(wizardCubit.next(), isTrue);
+      wizardCubit.updateFloor(
+        0,
+        const BuildingFloor(number: 1, length: 10, width: 8, height: 3.3),
+      );
+      wizardCubit.updateRoof(
+        const RoofSpec(type: RoofType.flat, length: 10, width: 8, height: 0.3),
+      );
+      expect(wizardCubit.next(), isTrue);
+      wizardCubit.selectFoundationType(FoundationType.strip);
+      wizardCubit.selectStructureType(StructureType.reinforcedConcrete);
+      expect(wizardCubit.next(), isTrue);
+      return wizardCubit;
+    }
+
+    test(
+        'chọn interior_paint + không thêm wall nào + điền đủ mục khác '
+        '→ next()/canComplete = true (Default Wall xử lý ở tầng tính toán)',
+        () {
+      final wizardCubit = buildWizardAtStep4();
+      wizardCubit.toggleMaterial(
+        const ProjectMaterial(
+          selectionKey: 'catalog:interior_paint',
+          catalogCode: 'interior_paint',
+          name: 'Sơn nội thất',
+          unit: 'm2',
+          unitPrice: 65000,
+          type: ProjectMaterialType.material,
+        ),
+      );
+      expect(wizardCubit.next(), isTrue);
+      expect(wizardCubit.state.currentStep, 4);
+
+      wizardCubit.updateDetails(
+        const ProjectDetails(
+          foundationSegments: [FoundationSegment(20)],
+        ),
+      );
+      expect(wizardCubit.state.isStepValid(4), isTrue);
+      expect(wizardCubit.state.canComplete, isTrue);
+      // buildProject không throw.
+      final project = wizardCubit.buildProject();
+      expect(project.details.walls, isEmpty);
+      expect(
+        project.materials.single.catalogCode,
+        'interior_paint',
+      );
+    });
+
+    test(
+        'WallSpec đã thêm dòng nhưng sai số (length=0) → vẫn bị REJECT '
+        '(lỗi nhập liệu thật, không che giấu bằng Default Wall)', () {
+      final wizardCubit = buildWizardAtStep4();
+      wizardCubit.toggleMaterial(
+        const ProjectMaterial(
+          selectionKey: 'catalog:interior_paint',
+          catalogCode: 'interior_paint',
+          name: 'Sơn nội thất',
+          unit: 'm2',
+          unitPrice: 65000,
+          type: ProjectMaterialType.material,
+        ),
+      );
+      expect(wizardCubit.next(), isTrue);
+
+      wizardCubit.updateDetails(
+        const ProjectDetails(
+          foundationSegments: [FoundationSegment(20)],
+          walls: [
+            WallSpec(
+              type: WallType.wall100,
+              plasterSides: 2,
+              length: 0,
+              height: 3.0,
+            ),
+          ],
+        ),
+      );
+      expect(wizardCubit.state.isStepValid(4), isFalse);
+      expect(wizardCubit.state.canComplete, isFalse);
+    });
+  });
 }

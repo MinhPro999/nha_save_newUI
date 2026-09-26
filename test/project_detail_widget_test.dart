@@ -5,6 +5,7 @@ import 'package:flutter_core_project/core/configs/assets/app_images.dart';
 import 'package:flutter_core_project/features/material_library/data/material_library_store.dart';
 import 'package:flutter_core_project/features/projects/data/project_store.dart';
 import 'package:flutter_core_project/features/projects/domain/entities/construction_project.dart';
+import 'package:flutter_core_project/features/projects/domain/services/calculation/legacy_calculation_service.dart';
 import 'package:flutter_core_project/features/projects/presentation/widgets/project_cover_image.dart';
 import 'package:flutter_core_project/presentation/choose_mode/bloc/locale_cubit.dart';
 import 'package:flutter_core_project/presentation/choose_mode/bloc/theme_cubit.dart';
@@ -54,7 +55,12 @@ void main() {
       AppImages.modernTownhouse,
     );
     expect(find.text('Tổng quan công trình'), findsOneWidget);
-    expect(find.text('169.320.000 ₫'), findsWidgets);
+    // Tổng chi phí hiển thị phải là kết quả calculation THẬT
+    // (LegacyCalculationService) — không phải placeholder cũ.
+    final expectedTotal = const LegacyCalculationService()
+        .calculate(_detailedProject())
+        .totalCost;
+    expect(find.text(_formatVnd(expectedTotal)), findsWidgets);
     expect(tester.takeException(), isNull);
 
     expect(find.text('Loại móng'), findsNWidgets(2));
@@ -110,6 +116,17 @@ void main() {
     Navigator.of(localizedContext).pop();
     await tester.pumpAndSettle();
   });
+}
+
+/// Khớp định dạng hiển thị của `project_detail_page.dart` (`_formatCurrency`).
+String _formatVnd(double value) {
+  final digits = value.round().toString();
+  final buffer = StringBuffer();
+  for (var index = 0; index < digits.length; index++) {
+    if (index > 0 && (digits.length - index) % 3 == 0) buffer.write('.');
+    buffer.write(digits[index]);
+  }
+  return '${buffer.toString()} ₫';
 }
 
 ConstructionProject _detailedProject() {

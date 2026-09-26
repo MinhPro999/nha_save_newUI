@@ -1,0 +1,40 @@
+{
+  "sourceSha": "e5fc8943daaab5953c75bd161061cd83a934b5fd",
+  "generatedAt": "2026-09-16T16:42:17.545803Z",
+  "caseId": "golden_integration_case_c",
+  "material": {
+    "quantities": {
+      "Gạch xây": 849.22,
+      "Xi măng": 0.84,
+      "Thép": 0.18,
+      "Nhôm": 5.94,
+      "Nhân công xây dựng": 50.0
+    },
+    "costs": {},
+    "intermediateResults": {}
+  },
+  "foundation": {
+    "columnConcreteM3": 0.6749999999999999,
+    "foundationConcreteM3": 4.0920000000000005,
+    "totalConcreteM3": 4.767,
+    "columnCementKg": 290.24999999999994,
+    "columnSandM3": 0.30374999999999996,
+    "columnStoneM3": 0.5804999999999999,
+    "columnWaterL": 124.87499999999999,
+    "foundationCementKg": 1759.5600000000002,
+    "foundationSandM3": 1.8414000000000004,
+    "foundationStoneM3": 3.5191200000000005,
+    "foundationWaterL": 757.0200000000001,
+    "totalCementKg": 2049.81,
+    "totalSandM3": 2.14515,
+    "totalStoneM3": 4.099620000000001,
+    "totalWaterL": 881.8950000000001,
+    "columnSteelKg": 113.47559999999999,
+    "foundationSteelKg": 114.13920000000002,
+    "totalSteelKg": 227.6148,
+    "cementBags50kg": 41,
+    "cementTon": 2.04981,
+    "steelTon": 0.2276148,
+    "waterM3": 0.8818950000000001
+  }
+}

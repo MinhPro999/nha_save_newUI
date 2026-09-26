@@ -1,0 +1,34 @@
+{
+  "sourceSha": "e5fc8943daaab5953c75bd161061cd83a934b5fd",
+  "generatedAt": "2026-09-16T16:42:17.545405Z",
+  "caseId": "golden_foundation_pile_no_caps",
+  "material": {
+    "quantities": {},
+    "costs": {},
+    "intermediateResults": {}
+  },
+  "foundation": {
+    "columnConcreteM3": 0.8999999999999999,
+    "foundationConcreteM3": 0.0,
+    "totalConcreteM3": 0.8999999999999999,
+    "columnCementKg": 386.99999999999994,
+    "columnSandM3": 0.40499999999999997,
+    "columnStoneM3": 0.7739999999999999,
+    "columnWaterL": 166.49999999999997,
+    "foundationCementKg": 0.0,
+    "foundationSandM3": 0.0,
+    "foundationStoneM3": 0.0,
+    "foundationWaterL": 0.0,
+    "totalCementKg": 386.99999999999994,
+    "totalSandM3": 0.40499999999999997,
+    "totalStoneM3": 0.7739999999999999,
+    "totalWaterL": 166.49999999999997,
+    "columnSteelKg": 151.30079999999998,
+    "foundationSteelKg": 0.0,
+    "totalSteelKg": 151.30079999999998,
+    "cementBags50kg": 8,
+    "cementTon": 0.38699999999999996,
+    "steelTon": 0.15130079999999999,
+    "waterM3": 0.16649999999999998
+  }
+}

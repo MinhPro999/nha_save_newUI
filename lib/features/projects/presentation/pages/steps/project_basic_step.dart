@@ -480,36 +480,39 @@ class _ProvincePickerSheetState extends State<_ProvincePickerSheet> {
                     itemBuilder: (context, index) {
                       final province = _filteredProvinces[index];
                       final selected = province.name == widget.selectedProvince;
-                      return ListTile(
-                        key: Key('province_${province.id}'),
-                        selected: selected,
-                        selectedTileColor: accent.withValues(alpha: 0.055),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        visualDensity: const VisualDensity(vertical: -1),
-                        title: Text(
-                          province.name,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: selected
-                                        ? FontWeight.w600
-                                        : FontWeight.w400,
-                                  ),
+                      return Material(
+                        type: MaterialType.transparency,
+                        child: ListTile(
+                          key: Key('province_${province.id}'),
+                          selected: selected,
+                          selectedTileColor: accent.withValues(alpha: 0.055),
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 20),
+                          visualDensity: const VisualDensity(vertical: -1),
+                          title: Text(
+                            province.name,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontWeight: selected
+                                          ? FontWeight.w600
+                                          : FontWeight.w400,
+                                    ),
+                          ),
+                          leading: Icon(
+                            Icons.location_on_rounded,
+                            size: 21,
+                            color: selected
+                                ? accent
+                                : Theme.of(context).colorScheme.outlineVariant,
+                          ),
+                          trailing: selected
+                              ? Icon(
+                                  Icons.check_circle_rounded,
+                                  color: accent,
+                                )
+                              : null,
+                          onTap: () => Navigator.pop(context, province),
                         ),
-                        leading: Icon(
-                          Icons.location_on_rounded,
-                          size: 21,
-                          color: selected
-                              ? accent
-                              : Theme.of(context).colorScheme.outlineVariant,
-                        ),
-                        trailing: selected
-                            ? Icon(
-                                Icons.check_circle_rounded,
-                                color: accent,
-                              )
-                            : null,
-                        onTap: () => Navigator.pop(context, province),
                       );
                     },
                   ),
@@ -674,42 +677,45 @@ class _DistrictPickerSheetState extends State<_DistrictPickerSheet> {
                     itemBuilder: (context, index) {
                       final district = _filteredDistricts[index];
                       final selected = district.id == widget.selectedDistrictId;
-                      return ListTile(
-                        key: Key('district_${district.id}'),
-                        selected: selected,
-                        selectedTileColor: accent.withValues(alpha: 0.055),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        visualDensity: const VisualDensity(vertical: -1),
-                        title: Text(
-                          district.name,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: selected
-                                        ? FontWeight.w600
-                                        : FontWeight.w400,
-                                  ),
+                      return Material(
+                        type: MaterialType.transparency,
+                        child: ListTile(
+                          key: Key('district_${district.id}'),
+                          selected: selected,
+                          selectedTileColor: accent.withValues(alpha: 0.055),
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 20),
+                          visualDensity: const VisualDensity(vertical: -1),
+                          title: Text(
+                            district.name,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontWeight: selected
+                                          ? FontWeight.w600
+                                          : FontWeight.w400,
+                                    ),
+                          ),
+                          subtitle: _showsLegacyProvince
+                              ? Text(
+                                  district.legacyProvinceName,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                )
+                              : null,
+                          leading: Icon(
+                            Icons.location_on_rounded,
+                            size: 21,
+                            color: selected
+                                ? accent
+                                : Theme.of(context).colorScheme.outlineVariant,
+                          ),
+                          trailing: selected
+                              ? Icon(
+                                  Icons.check_circle_rounded,
+                                  color: accent,
+                                )
+                              : null,
+                          onTap: () => Navigator.pop(context, district),
                         ),
-                        subtitle: _showsLegacyProvince
-                            ? Text(
-                                district.legacyProvinceName,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              )
-                            : null,
-                        leading: Icon(
-                          Icons.location_on_rounded,
-                          size: 21,
-                          color: selected
-                              ? accent
-                              : Theme.of(context).colorScheme.outlineVariant,
-                        ),
-                        trailing: selected
-                            ? Icon(
-                                Icons.check_circle_rounded,
-                                color: accent,
-                              )
-                            : null,
-                        onTap: () => Navigator.pop(context, district),
                       );
                     },
                   ),

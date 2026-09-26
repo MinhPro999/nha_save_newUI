@@ -1,0 +1,34 @@
+{
+  "sourceSha": "e5fc8943daaab5953c75bd161061cd83a934b5fd",
+  "generatedAt": "2026-09-16T16:42:17.545202Z",
+  "caseId": "golden_foundation_two_floors_h_total",
+  "material": {
+    "quantities": {},
+    "costs": {},
+    "intermediateResults": {}
+  },
+  "foundation": {
+    "columnConcreteM3": 1.5312000000000001,
+    "foundationConcreteM3": 2.25,
+    "totalConcreteM3": 3.7812,
+    "columnCementKg": 658.416,
+    "columnSandM3": 0.6890400000000001,
+    "columnStoneM3": 1.316832,
+    "columnWaterL": 283.27200000000005,
+    "foundationCementKg": 967.5,
+    "foundationSandM3": 1.0125,
+    "foundationStoneM3": 1.935,
+    "foundationWaterL": 416.25,
+    "totalCementKg": 1625.9160000000002,
+    "totalSandM3": 1.70154,
+    "totalStoneM3": 3.2518320000000003,
+    "totalWaterL": 699.522,
+    "columnSteelKg": 221.76,
+    "foundationSteelKg": 126.0,
+    "totalSteelKg": 347.76,
+    "cementBags50kg": 33,
+    "cementTon": 1.6259160000000001,
+    "steelTon": 0.34776,
+    "waterM3": 0.6995220000000001
+  }
+}

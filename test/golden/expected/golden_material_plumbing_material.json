@@ -1,0 +1,36 @@
+{
+  "sourceSha": "e5fc8943daaab5953c75bd161061cd83a934b5fd",
+  "generatedAt": "2026-09-16T16:42:17.542941Z",
+  "caseId": "golden_material_plumbing_material",
+  "material": {
+    "quantities": {
+      "Vật tư điện nước": 50.0
+    },
+    "costs": {},
+    "intermediateResults": {}
+  },
+  "foundation": {
+    "columnConcreteM3": 0.0,
+    "foundationConcreteM3": 0.0,
+    "totalConcreteM3": 0.0,
+    "columnCementKg": 0.0,
+    "columnSandM3": 0.0,
+    "columnStoneM3": 0.0,
+    "columnWaterL": 0.0,
+    "foundationCementKg": 0.0,
+    "foundationSandM3": 0.0,
+    "foundationStoneM3": 0.0,
+    "foundationWaterL": 0.0,
+    "totalCementKg": 0.0,
+    "totalSandM3": 0.0,
+    "totalStoneM3": 0.0,
+    "totalWaterL": 0.0,
+    "columnSteelKg": 0.0,
+    "foundationSteelKg": 0.0,
+    "totalSteelKg": 0.0,
+    "cementBags50kg": 0,
+    "cementTon": 0.0,
+    "steelTon": 0.0,
+    "waterM3": 0.0
+  }
+}
